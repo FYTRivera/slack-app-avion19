@@ -1,5 +1,6 @@
 import { userInfo } from "os";
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 
 type SignInProps = {
@@ -104,7 +105,7 @@ export default function Signin(props: SignInProps){
         <h6>New to Slack?</h6>
         <a href="#">Create a new account!</a>
       </div>
-        </div>
-    )
-}
+    </div>
+  );
+};
 

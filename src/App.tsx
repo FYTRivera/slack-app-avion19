@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import Signup from "./components/signup";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "./components/dashboard/index";
 import Signin from "./components/signin";
+import Signup from "./components/signup";
+import PrivateRoutes from "./privateRoutes";
 import "./styles/app.css";
 import userAccounts from "./users";
+
 
 function App() {
 
@@ -40,6 +44,6 @@ const [appUsers, setAppUsers] = useState([ //array to store user accounts
       )}
     </div>
   );
-}
+};
 
 export default App;

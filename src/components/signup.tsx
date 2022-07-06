@@ -1,14 +1,10 @@
 import React, { ChangeEvent } from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import "../styles/signup.css";
 
-interface SignupProps {
-  // e: Event,
-  name: String;
-}
-
-export default function Signup() {
-  const handleSubmit = (e: React.FormEvent<HTMLInputElement>): void => {
+const Signup: React.FC = () => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
 
@@ -46,8 +42,10 @@ export default function Signup() {
       </form>
       <div className="footer">
         <h6>Already using Slack?</h6>
-        <a href="#">Sign in to an existing account</a>
+        <Link to="/signin">Sign in to an existing account</Link>
       </div>
     </div>
   );
-}
+};
+
+export default Signup;
