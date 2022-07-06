@@ -1,0 +1,151 @@
+@use "./app.scss" as *;
+
+.signup {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  line-height: 0;
+  gap: 1rem;
+
+  img {
+    height: auto;
+    width: 10rem;
+  }
+
+  h1 {
+    // font-weight: 1000;
+  }
+
+  h4 {
+    font-family: sans-serif;
+    font-weight: 500;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .google-signup,
+    .facebook-signup {
+      padding: 0.8rem 5rem;
+      gap: 0.5rem;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      line-height: 0;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      border: 2px solid #4285f4;
+      font-weight: 700;
+
+      &:hover {
+        border: 2px solid #2e5eaa;
+      }
+
+      &:focus {
+        box-shadow: 0px 0px 3px 4px #9bb5eb;
+      }
+    }
+
+    .google-signup {
+      color: #4285f4;
+
+      .fa-google {
+        background: -webkit-linear-gradient(#4285f4, #db4437, #f4b400, #0f9d58);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    .facebook-signup {
+      color: #4267b2;
+    }
+  }
+
+  h5 {
+    display: flex;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      display: flex;
+      height: 1px;
+      width: 8rem;
+      background: rgb(200, 200, 200);
+    }
+
+    &::before {
+      position: absolute;
+      left: -9rem;
+    }
+
+    &::after {
+      position: absolute;
+      right: -9rem;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 21rem;
+
+    .fullname,
+    .email,
+    .password,
+    .confirm-password {
+      font-size: 0.9rem;
+      padding: 0.7rem;
+      border-radius: 5px;
+      border: 2px solid #7996cf;
+      outline: none;
+
+      &:focus {
+        box-shadow: 0px 0px 3px 4px #9bb5eb;
+      }
+
+      &:hover {
+        border: 2px solid #4267b2;
+      }
+    }
+
+    .submit {
+      margin-top: 1rem;
+      padding: 0.8rem;
+      border-radius: 5px;
+      background-color: rgb(109, 50, 133);
+      color: white;
+      border: none;
+      font-weight: 1000;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(94, 44, 114);
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // gap: 0.3rem;
+    flex-direction: column;
+
+    h6 {
+      color: gray;
+      font-weight: 100;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 0.8rem;
+      color: #577fcf;
+      font-family: sans-serif;
+    }
+  }
+}
