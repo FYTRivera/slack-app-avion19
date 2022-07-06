@@ -1,13 +1,14 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import logo from "../assets/logo.svg";
 import "../styles/signup.css";
 
 interface SignupProps {
-  e: Event;
+  // e: Event,
+  name: String;
 }
 
 export default function Signup() {
-  const handleSubmit = ({ e }: SignupProps) => {
+  const handleSubmit = (e: React.FormEvent<HTMLInputElement>): void => {
     e.preventDefault();
   };
 
@@ -36,7 +37,12 @@ export default function Signup() {
           type="password"
           placeholder="Confirm password"
         />
-        <input className="submit" type="submit" value="Create Account" />
+        <input
+          className="submit"
+          type="submit"
+          value="Create Account"
+          onClick={handleSubmit}
+        />
       </form>
       <div className="footer">
         <h6>Already using Slack?</h6>
