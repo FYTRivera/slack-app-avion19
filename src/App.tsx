@@ -54,31 +54,6 @@ const App: React.FC = () => {
       <Route path="signup" element={<Signup />} />
     </Routes>
   );
-  {
-    /* {!isLoggedIn ? (
-        //if not logged in
-        <Signin
-          setIsLoggedIn={setIsLoggedIn}
-          user={user}
-          setUser={setUser}
-          error={error}
-          setError={setError}
-          appUsers={appUsers}
-          setAppUsers={setAppUsers}
-        />
-      ) : (
-        // <Signup />
-        //if logged in
-        <>
-          <span>logged in</span>
-          <div>
-            <span>hi {user.name}</span>
-          </div>
-          {/* temporary log out button vvv */
-  }
-  {
-    /* <button onClick={() => setIsLoggedIn(false)}>Log Out</button> */
-  }
 };
 
 export default App;

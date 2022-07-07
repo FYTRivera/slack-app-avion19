@@ -100,12 +100,14 @@ body {
 .signup form .email,
 .signup form .password,
 .signup form .confirm-password {
-  font-size: 0.9rem;
+  font-size: 1rem;
   padding: 0.7rem;
   border-radius: 5px;
   border: 2px solid #7996cf;
   outline: none;
   transition: box-shadow 0.2s;
+  font-family: "Roboto", sans-serif;
+  font-weight: 1000;
 }
 .signup form .fullname:focus,
 .signup form .email:focus,
@@ -131,6 +133,7 @@ body {
   font-weight: 1000;
   cursor: pointer;
   transition: background-position 0.3s;
+  outline-color: #a6a4a7;
 }
 .signup form .submit:hover {
   background-position: 100%;
