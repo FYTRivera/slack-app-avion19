@@ -24,7 +24,7 @@ const Signup: React.FC = () => {
         </button>
       </div>
       <h5>OR</h5>
-      <form action="">
+      <form action="" onSubmit={handleSubmit}>
         <input className="fullname" type="text" placeholder="Full Name" />
         <input className="email" type="email" placeholder="Email Address" />
         <input className="password" type="password" placeholder="Password" />
@@ -33,12 +33,7 @@ const Signup: React.FC = () => {
           type="password"
           placeholder="Confirm password"
         />
-        <input
-          className="submit"
-          type="submit"
-          value="Create Account"
-          onClick={handleSubmit}
-        />
+        <input className="submit" type="submit" value="Create Account" />
       </form>
       <div className="footer">
         <h6>Already using Slack?</h6>

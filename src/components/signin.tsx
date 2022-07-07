@@ -2,6 +2,8 @@ import { userInfo } from "os";
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
+import "../styles/signin.css";
+
 
 type SignInProps = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
@@ -104,6 +106,7 @@ export default function Signin(props: SignInProps){
       <div className="footer">
         <h6>New to Slack?</h6>
         <a href="#">Create a new account!</a>
+
       </div>
     </div>
   );

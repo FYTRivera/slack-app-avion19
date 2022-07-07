@@ -1,0 +1,76 @@
+@use "./app.scss" as *;
+
+.signin {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  line-height: 0;
+  gap: 2rem;
+
+  img {
+    height: auto;
+    width: 10rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 18rem;
+
+    .email,
+    .password {
+      font-size: 0.9rem;
+      padding: 0.7rem;
+      border-radius: 5px;
+      border: 2px solid #7996cf;
+      outline: none;
+
+      &:focus {
+        box-shadow: 0px 0px 3px 4px #9bb5eb;
+      }
+
+      &:hover {
+        border: 2px solid #4267b2;
+      }
+    }
+
+    .submit {
+      margin-top: 1rem;
+      padding: 0.8rem;
+      border-radius: 5px;
+      background-image: linear-gradient(to right, #0c610c, #4e824e, #084608);
+      background-position: 0%;
+      background-size: 600%;
+      color: white;
+      border: none;
+      font-weight: 1000;
+      cursor: pointer;
+      transition: background-position 0.3s;
+
+      &:hover {
+        background-position: 100%;
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // gap: 0.3rem;
+    flex-direction: column;
+
+    h6 {
+      color: gray;
+      font-weight: 100;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 0.8rem;
+      color: #577fcf;
+      font-family: "Roboto", sans-serif;
+    }
+  }
+}

@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.signin {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  line-height: 0;
+  gap: 2rem;
+}
+.signin img {
+  height: auto;
+  width: 10rem;
+}
+.signin form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 18rem;
+}
+.signin form .email,
+.signin form .password {
+  font-size: 0.9rem;
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: 2px solid #7996cf;
+  outline: none;
+}
+.signin form .email:focus,
+.signin form .password:focus {
+  box-shadow: 0px 0px 3px 4px #9bb5eb;
+}
+.signin form .email:hover,
+.signin form .password:hover {
+  border: 2px solid #4267b2;
+}
+.signin form .submit {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #0c610c, #4e824e, #084608);
+  background-position: 0%;
+  background-size: 600%;
+  color: white;
+  border: none;
+  font-weight: 1000;
+  cursor: pointer;
+  transition: background-position 0.3s;
+}
+.signin form .submit:hover {
+  background-position: 100%;
+}
+.signin .footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.signin .footer h6 {
+  color: gray;
+  font-weight: 100;
+}
+.signin .footer a {
+  text-decoration: none;
+  font-size: 0.8rem;
+  color: #577fcf;
+  font-family: "Roboto", sans-serif;
+}
+
+/*# sourceMappingURL=signin.css.map */
