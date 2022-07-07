@@ -12,7 +12,7 @@ const Signin: React.FC = () => {
     <div className="signin">
       <img src={logo}></img>
       <h1>Sign in to Slack</h1>
-      <form action="">
+      <form action="" onSubmit={handleSubmit}>
         <input className="email" type="email" placeholder="Email Address" />
         <input className="password" type="password" placeholder="Password" />
         <input className="submit" type="submit" value="Sign In" />
