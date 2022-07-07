@@ -41,6 +41,7 @@ body {
   border-radius: 5px;
   border: 2px solid #7996cf;
   outline: none;
+  transition: box-shadow 0.2s;
 }
 .signin form .email:focus,
 .signin form .password:focus {
@@ -62,6 +63,7 @@ body {
   font-weight: 1000;
   cursor: pointer;
   transition: background-position 0.3s;
+  outline: none;
 }
 .signin form .submit:hover {
   background-position: 100%;
@@ -81,6 +83,9 @@ body {
   font-size: 0.8rem;
   color: #577fcf;
   font-family: "Roboto", sans-serif;
+}
+.signin .footer a:hover {
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=signin.css.map */

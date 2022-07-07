@@ -50,6 +50,7 @@ body {
   cursor: pointer;
   border: 2px solid #4285f4;
   font-weight: 700;
+  transition: box-shadow 0.2s;
 }
 .signup .buttons .google-signup:hover,
 .signup .buttons .facebook-signup:hover {
@@ -104,6 +105,7 @@ body {
   border-radius: 5px;
   border: 2px solid #7996cf;
   outline: none;
+  transition: box-shadow 0.2s;
 }
 .signup form .fullname:focus,
 .signup form .email:focus,
@@ -148,6 +150,9 @@ body {
   font-size: 0.8rem;
   color: #577fcf;
   font-family: "Roboto", sans-serif;
+}
+.signup .footer a:hover {
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=signup.css.map */
