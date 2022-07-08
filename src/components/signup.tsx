@@ -1,6 +1,7 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
+import { signUpAPI } from "../dataFetching";
 import "../styles/signup.css";
 
 const Signup: React.FC = () => {
@@ -8,29 +9,44 @@ const Signup: React.FC = () => {
     name: "",
     email: "",
     password: "",
-    confirm_password: "",
+    password_confirmation: "",
   });
-  const [emailError, setEmailError] = useState("");
-  const [isValid, setIsValid] = useState(false);
-  const usersList = JSON.parse(localStorage.getItem("appUsers") || "");
+
+  const [error, setError] = useState("");
+  const [isCreated, setIsCreated] = useState(false);
+  const nameIn = useRef(null);
+  const emailIn = useRef(null);
+  const passIn = useRef(null);
+  const conPassIn = useRef(null);
+  const errorRef: any = useRef(null);
+  // const refs = [nameIn, emailIn, passIn, conPassIn];
 
   useEffect(() => {
-    if (isValid) {
-      usersList.push(newUser);
-      console.log(usersList);
-    }
-  }, [isValid]);
+    setError("");
+  }, [newUser]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    nameIn.current.value = "";
+  }, [isCreated]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    usersList.map((user: { email: string }) => {
-      if (user.email !== newUser.email) {
-        setIsValid(true);
-      } else {
-        // console.log(newUser);
+    try {
+      const fetch = await signUpAPI(newUser);
+
+      if (fetch.status === "error") {
+        errorRef.current.style.color = "red";
+        setError(fetch.errors.full_messages[0]);
+        console.log(nameIn);
+      } else if (fetch.status === "success") {
+        errorRef.current.style.color = "green";
+        setError("Account Successfully Created");
+        setIsCreated(true);
       }
-    });
+    } catch (error) {
+      setError(error.toString());
+    }
   };
 
   return (
@@ -52,6 +68,7 @@ const Signup: React.FC = () => {
       <form action="" onSubmit={handleSubmit}>
         <input
           required
+          ref={nameIn}
           className="fullname"
           type="text"
           placeholder="Full Name"
@@ -60,6 +77,7 @@ const Signup: React.FC = () => {
         />
         <input
           required
+          ref={emailIn}
           className="email"
           type="email"
           placeholder="Email Address"
@@ -68,6 +86,7 @@ const Signup: React.FC = () => {
         />
         <input
           required
+          ref={passIn}
           className="password"
           type="password"
           placeholder="Password"
@@ -76,16 +95,20 @@ const Signup: React.FC = () => {
         />
         <input
           required
+          ref={conPassIn}
           className="confirm-password"
           type="password"
           placeholder="Confirm password"
-          value={newUser.confirm_password}
+          value={newUser.password_confirmation}
           onChange={(e) =>
-            setNewUser({ ...newUser, confirm_password: e.target.value })
+            setNewUser({ ...newUser, password_confirmation: e.target.value })
           }
         />
         <input className="submit" type="submit" value="Create Account" />
       </form>
+      <div ref={errorRef} className="error">
+        {error}
+      </div>
       <div className="footer">
         <h6>Already using Slack?</h6>
         <Link to="/signin">Sign in to an existing account</Link>

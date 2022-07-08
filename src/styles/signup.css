@@ -94,7 +94,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  width: 18rem;
+  width: 20rem;
 }
 .signup form .fullname,
 .signup form .email,
@@ -137,6 +137,13 @@ body {
 }
 .signup form .submit:hover {
   background-position: 100%;
+}
+.signup .error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem;
+  font-size: 0.9rem;
 }
 .signup .footer {
   display: flex;

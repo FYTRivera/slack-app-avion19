@@ -89,7 +89,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: 18rem;
+    width: 20rem;
 
     .fullname,
     .email,
@@ -131,6 +131,14 @@
         background-position: 100%;
       }
     }
+  }
+
+  .error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.8rem;
+    font-size: 0.9rem;
   }
 
   .footer {

@@ -53,23 +53,6 @@ body {
 .signin form .password:hover {
   border: 2px solid #4267b2;
 }
-.signin form .error {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
-  color: rgb(243, 70, 70);
-  font-size: 0.9rem;
-  animation: errorLogin 0.1s ease-in-out 0s 5 alternate forwards;
-}
-@keyframes errorLogin {
-  from {
-    transform: translateX(10px);
-  }
-  to {
-    transform: translateX(0px);
-  }
-}
 .signin form .submit {
   padding: 0.8rem;
   border-radius: 5px;
@@ -82,12 +65,29 @@ body {
   cursor: pointer;
   transition: background-position 0.3s;
   outline-color: #abb4ab;
+  margin-top: 0.5rem;
 }
 .signin form .submit:hover {
   background-position: 50%;
 }
 .signin form .submit:active {
   background-position: 100%;
+}
+.signin .error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(243, 70, 70);
+  font-size: 0.9rem;
+  animation: errorLogin 0.1s ease-in-out 0s 5 alternate forwards;
+}
+@keyframes errorLogin {
+  from {
+    transform: translateX(10px);
+  }
+  to {
+    transform: translateX(0px);
+  }
 }
 .signin .footer {
   display: flex;
