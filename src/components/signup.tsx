@@ -1,11 +1,36 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import "../styles/signup.css";
 
 const Signup: React.FC = () => {
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  });
+  const [emailError, setEmailError] = useState("");
+  const [isValid, setIsValid] = useState(false);
+  const usersList = JSON.parse(localStorage.getItem("appUsers") || "");
+
+  useEffect(() => {
+    if (isValid) {
+      usersList.push(newUser);
+      console.log(usersList);
+    }
+  }, [isValid]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    usersList.map((user: { email: string }) => {
+      if (user.email !== newUser.email) {
+        setIsValid(true);
+      } else {
+        // console.log(newUser);
+      }
+    });
   };
 
   return (
@@ -25,13 +50,39 @@ const Signup: React.FC = () => {
       </div>
       <h5>OR</h5>
       <form action="" onSubmit={handleSubmit}>
-        <input className="fullname" type="text" placeholder="Full Name" />
-        <input className="email" type="email" placeholder="Email Address" />
-        <input className="password" type="password" placeholder="Password" />
         <input
+          required
+          className="fullname"
+          type="text"
+          placeholder="Full Name"
+          value={newUser.name}
+          onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+        />
+        <input
+          required
+          className="email"
+          type="email"
+          placeholder="Email Address"
+          value={newUser.email}
+          onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+        />
+        <input
+          required
+          className="password"
+          type="password"
+          placeholder="Password"
+          value={newUser.password}
+          onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+        />
+        <input
+          required
           className="confirm-password"
           type="password"
           placeholder="Confirm password"
+          value={newUser.confirm_password}
+          onChange={(e) =>
+            setNewUser({ ...newUser, confirm_password: e.target.value })
+          }
         />
         <input className="submit" type="submit" value="Create Account" />
       </form>

@@ -4,7 +4,6 @@ import logo from "../assets/logo.svg";
 import "../styles/signin.css";
 
 type SignInProps = {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   user: {
     name: string;
     email: string;
@@ -36,27 +35,21 @@ type SignInProps = {
 };
 
 const Signin: React.FC<SignInProps> = (props) => {
-  // const user = props.user;
-  // const setUser = props.setUser;
-  // const error = props.error;
-  // const setError = props.setError;
-  // const appUsers = props.appUsers;
-  // const setAppUsers = props.setAppUsers;
-  const {
-    user,
-    setUser,
-    error,
-    setError,
-    appUsers,
-    setAppUsers,
-    setIsLoggedIn,
-  } = props;
+  const { user, setUser, error, setError, appUsers, setAppUsers } = props;
+  // const usersInLocal = JSON.parse(localStorage.getItem("appUsers") || "");
 
   function onSignIn(e: React.FormEvent) {
     e.preventDefault();
     //finds the index of the user's account in the appUsers array
     const specificIndex = appUsers.findIndex((e) => e.email === user.email);
     const currentUser = appUsers[specificIndex];
+
+    // const test = usersInLocal.find(
+    //   (e: { email: string }, users: { email: string }) =>
+    //     users.email === e.email
+    // );
+
+    // console.log(test);
 
     //if account exists
     if (specificIndex >= 0) {
@@ -66,8 +59,7 @@ const Signin: React.FC<SignInProps> = (props) => {
         user.password === currentUser.password
       ) {
         setUser({ ...user, name: currentUser.name });
-        setIsLoggedIn(true);
-        //removes error message
+        localStorage.setItem("isLoggedIn", JSON.stringify(true));
         setError("");
       }
 
@@ -77,20 +69,19 @@ const Signin: React.FC<SignInProps> = (props) => {
         user.password != appUsers[specificIndex].password
       ) {
         setError("Password is incorrect.");
-        console.log(user);
       }
 
       //if failed
-      else {
-        //logs that there is no account when nothing is inputted
-        console.log("no account");
-        console.log(user);
-        //shows error message on page that user log in is invalid
-        setError("Invalid.");
-      }
+      // else {
+      //   //logs that there is no account when nothing is inputted
+      //   console.log("no account");
+      //   console.log(user);
+      //   //shows error message on page that user log in is invalid
+      //   setError("Invalid.");
+      // }
     }
 
-    //if account does not exist
+    // if account does not exist
     else {
       //logs that there is no account when nothing is inputted
       console.log("no account");

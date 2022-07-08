@@ -44,6 +44,17 @@
       justify-content: center;
       margin: 1rem;
       color: rgb(243, 70, 70);
+      font-size: 0.9rem;
+      animation: errorLogin 0.1s ease-in-out 0s 5 alternate forwards;
+
+      @keyframes errorLogin {
+        from {
+          transform: translateX(10px);
+        }
+        to {
+          transform: translateX(0px);
+        }
+      }
     }
 
     .submit {
