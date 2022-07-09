@@ -1,32 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Noto Sans", sans-serif;
+.sidebar {
+  border: 1px solid black;
+  background-color: rgb(70, 30, 70);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   height: 100vh;
-  width: 100vw;
-}
-
-.animation {
-  animation: error 0.04s ease-in-out 0s 6 alternate forwards;
-}
-@keyframes error {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(5px);
-  }
+  width: 25vmin;
 }
 
 /*# sourceMappingURL=sidebar.css.map */

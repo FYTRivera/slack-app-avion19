@@ -1,21 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "./pages/sidebar";
 import Message from "./pages/message";
-import "../../styles/app.css";
+import "../../styles/dashboard/index.css";
 
-interface DashboardProps{
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Dashboard: React.FC<DashboardProps> = ({setIsLoggedIn}) => {
+const Dashboard: React.FC = () => {
   return (
-    <>
-      <Sidebar setIsLoggedIn={setIsLoggedIn} />
+    <div className="dashboard">
+      <Sidebar />
       <Routes>
         <Route path="messages" element={<Message />} />
       </Routes>
-    </>
+    </div>
   );
 };
 

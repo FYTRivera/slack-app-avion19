@@ -24,4 +24,9 @@ body {
   }
 }
 
-/*# sourceMappingURL=app.css.map */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=index.css.map */

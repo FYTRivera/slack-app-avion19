@@ -1,4 +1,16 @@
-@use "../app.scss";
+// @use "../app.scss" as *;
+// body {
+//   margin: 0;
+// }
 
 .sidebar {
+  border: 1px solid black;
+  background-color: rgb(70, 30, 70);
+  display: flex;
+  //   align-self: flex-start;
+  flex-direction: column;
+  //   justify-content: flex-start;
+  //   align-items: flex-start;
+  height: 100vh;
+  width: 25vmin;
 }

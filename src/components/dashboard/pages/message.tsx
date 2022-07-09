@@ -1,7 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import "../../../styles/dashboard/message.css";
 
 const Message: React.FC = () => {
-  return <div>Message</div>;
+  return (
+    <Link to="messages" className="messages">
+      Message
+    </Link>
+  );
 };
 
 export default Message;

@@ -4,7 +4,6 @@ import Dashboard from "./components/dashboard/index";
 import Signin from "./components/signin";
 import Signup from "./components/signup";
 import PrivateRoutes from "./privateRoutes";
-import "./styles/app.css";
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,7 +19,7 @@ const App: React.FC = () => {
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
-        <Route path="/dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
       </Route>
       <Route path="signin" element={<Signin setIsLoggedIn={setIsLoggedIn} />} />
       <Route path="signup" element={<Signup />} />
