@@ -17,6 +17,18 @@ body {
   width: 100vw;
 }
 
+.animation {
+  animation: error 0.04s ease-in-out 0s 6 alternate forwards;
+}
+@keyframes error {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(5px);
+  }
+}
+
 .signup {
   display: flex;
   align-items: center;
@@ -125,7 +137,7 @@ body {
   margin-top: 1rem;
   padding: 0.8rem;
   border-radius: 5px;
-  background-image: linear-gradient(to right, #5e2c72, #654571, #401e4e);
+  background-image: linear-gradient(to right, #5e2c72, #745580, #401e4e);
   background-position: 0%;
   background-size: 600%;
   color: white;
@@ -136,9 +148,13 @@ body {
   outline-color: #a6a4a7;
 }
 .signup form .submit:hover {
+  background-position: 50%;
+}
+.signup form .submit:active {
   background-position: 100%;
 }
 .signup .error {
+  color: red;
   display: flex;
   align-items: center;
   justify-content: center;

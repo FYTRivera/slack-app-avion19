@@ -117,7 +117,7 @@
       margin-top: 1rem;
       padding: 0.8rem;
       border-radius: 5px;
-      background-image: linear-gradient(to right, #5e2c72, #654571, #401e4e);
+      background-image: linear-gradient(to right, #5e2c72, #745580, #401e4e);
       background-position: 0%;
       background-size: 600%;
       color: white;
@@ -128,12 +128,17 @@
       outline-color: #a6a4a7;
 
       &:hover {
+        background-position: 50%;
+      }
+
+      &:active {
         background-position: 100%;
       }
     }
   }
 
   .error {
+    color: red;
     display: flex;
     align-items: center;
     justify-content: center;

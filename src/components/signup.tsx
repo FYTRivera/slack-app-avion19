@@ -19,10 +19,13 @@ const Signup: React.FC = () => {
   const passIn = useRef(null);
   const conPassIn = useRef(null);
   const errorRef = useRef(null);
+  const myForm = useRef(null);
   const refs = [nameIn, emailIn, passIn, conPassIn];
 
+  //Hides error message when user types in the form
   useEffect(() => {
     setError("");
+    errorRef.current.classList.remove("animation");
   }, [newUser]);
 
   useEffect(() => {
@@ -34,10 +37,13 @@ const Signup: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    error && errorRef.current.classList.remove("animation");
+
     try {
       const fetch = await signUpAPI(newUser);
 
       if (fetch.status === "error") {
+        errorRef.current.classList.add("animation");
         errorRef.current.style.color = "red";
         setError(fetch.errors.full_messages[0]);
       } else if (fetch.status === "success") {
@@ -46,7 +52,8 @@ const Signup: React.FC = () => {
         setIsCreated(true);
       }
     } catch (error) {
-      setError(error.toString());
+      errorRef.current.classList.add("animation");
+      setError("Sign up is currently under maintenance");
     }
   };
 
@@ -66,7 +73,7 @@ const Signup: React.FC = () => {
         </button>
       </div>
       <h5>OR</h5>
-      <form action="" onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmit} ref={myForm}>
         <input
           required
           ref={nameIn}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { signInAPI } from "../dataFetching";
@@ -14,13 +14,18 @@ const Signin: React.FC<sIgnInProp> = ({ setIsLoggedIn }) => {
     password: "",
   });
   const [error, setError] = useState("");
+  const errorRef = useRef(null);
 
+  //Hides error message when user types in the form
   useEffect(() => {
     setError("");
+    errorRef.current.classList.remove("animation");
   }, [signUser]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    error && errorRef.current.classList.remove("animation");
 
     try {
       const fetch = await signInAPI(signUser);
@@ -28,10 +33,12 @@ const Signin: React.FC<sIgnInProp> = ({ setIsLoggedIn }) => {
       if (fetch.data) {
         setIsLoggedIn(true);
       } else if (!fetch.success) {
+        errorRef.current.classList.add("animation");
         setError(fetch.errors[0]);
       }
     } catch {
-      setError("Website is currently unavailable");
+      errorRef.current.classList.add("animation");
+      setError("Sign in is currently under maintenance");
     }
   };
 
@@ -60,7 +67,9 @@ const Signin: React.FC<sIgnInProp> = ({ setIsLoggedIn }) => {
         />
         <input type="submit" value="Sign In" className="submit" />
       </form>
-      <div className="error">{error}</div>
+      <div className="error" ref={errorRef}>
+        {error}
+      </div>
       <div className="footer">
         <h6>New to Slack?</h6>
         <Link to="/signup">Create a new account</Link>
