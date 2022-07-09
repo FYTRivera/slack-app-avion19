@@ -20,7 +20,7 @@ const App: React.FC = () => {
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} />} />
       </Route>
       <Route path="signin" element={<Signin setIsLoggedIn={setIsLoggedIn} />} />
       <Route path="signup" element={<Signup />} />

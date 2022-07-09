@@ -4,11 +4,11 @@ import logo from "../assets/logo.svg";
 import { signInAPI } from "../dataFetching";
 import "../styles/signin.css";
 
-interface sIgnInProp {
+interface signInProp {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Signin: React.FC<sIgnInProp> = ({ setIsLoggedIn }) => {
+const Signin: React.FC<signInProp> = ({ setIsLoggedIn }) => {
   const [signUser, setSignUser] = useState({
     email: "",
     password: "",
@@ -34,6 +34,7 @@ const Signin: React.FC<sIgnInProp> = ({ setIsLoggedIn }) => {
         setIsLoggedIn(true);
       } else if (!fetch.success) {
         errorRef.current.classList.add("animation");
+        console.log(fetch)
         setError(fetch.errors[0]);
       }
     } catch {
