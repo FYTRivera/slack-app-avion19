@@ -4,10 +4,14 @@ import Sidebar from "./pages/sidebar";
 import Message from "./pages/message";
 import "../../styles/app.css";
 
-const Dashboard: React.FC = () => {
+interface DashboardProps{
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({setIsLoggedIn}) => {
   return (
     <>
-      <Sidebar />
+      <Sidebar setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route path="messages" element={<Message />} />
       </Routes>
