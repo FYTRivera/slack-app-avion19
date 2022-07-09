@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { signUpAPI } from "../dataFetching";
@@ -18,15 +18,17 @@ const Signup: React.FC = () => {
   const emailIn = useRef(null);
   const passIn = useRef(null);
   const conPassIn = useRef(null);
-  const errorRef: any = useRef(null);
-  // const refs = [nameIn, emailIn, passIn, conPassIn];
+  const errorRef = useRef(null);
+  const refs = [nameIn, emailIn, passIn, conPassIn];
 
   useEffect(() => {
     setError("");
   }, [newUser]);
 
   useEffect(() => {
-    nameIn.current.value = "";
+    refs.forEach((ref) => {
+      ref.current.value = "";
+    });
   }, [isCreated]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,7 +40,6 @@ const Signup: React.FC = () => {
       if (fetch.status === "error") {
         errorRef.current.style.color = "red";
         setError(fetch.errors.full_messages[0]);
-        console.log(nameIn);
       } else if (fetch.status === "success") {
         errorRef.current.style.color = "green";
         setError("Account Successfully Created");

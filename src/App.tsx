@@ -7,12 +7,8 @@ import PrivateRoutes from "./privateRoutes";
 import "./styles/app.css";
 
 const App: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); //boolean to check if logged in or not
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  if (!localStorage.getItem("isLoggedIn")) {
-    localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
-  }
 
   useEffect(() => {
     if (isLoggedIn) {

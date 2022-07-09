@@ -26,12 +26,9 @@ const Signin: React.FC<sIgnInProp> = ({ setIsLoggedIn }) => {
       const fetch = await signInAPI(signUser);
 
       if (fetch.data) {
-        console.log("success");
         setIsLoggedIn(true);
-        localStorage.setItem("isLoggedIn", JSON.stringify(true));
       } else if (!fetch.success) {
         setError(fetch.errors[0]);
-        console.log("error");
       }
     } catch {
       setError("Website is currently unavailable");

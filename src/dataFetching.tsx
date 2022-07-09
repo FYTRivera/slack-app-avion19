@@ -1,5 +1,3 @@
-import React from "react";
-
 const signUpAPI = async (newUser: any) => {
   return (
     await fetch("http://206.189.91.54/api/v1/auth/", {
