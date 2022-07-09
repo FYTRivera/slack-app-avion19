@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "./pages/sidebar";
 import Message from "./pages/message";
+import "../../styles/app.css";
 
 const Dashboard: React.FC = () => {
   return (
