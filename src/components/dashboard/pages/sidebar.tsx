@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../../styles/dashboard/sidebar.css";
+import Message from "./message";
 
 const Sidebar: React.FC = () => {
   const channelList = useRef(null);
@@ -26,15 +27,21 @@ const Sidebar: React.FC = () => {
     <div className="sidebar">
       <div className="title">Avion School</div>
       <div className="options">
-        <div className="threads">
-          <i className="fa-regular fa-comment-dots"></i>Threads
-        </div>
-        <div className="direct-message">
-          <i className="fa-regular fa-comments"></i>Direct messages
-        </div>
-        <div className="mentions">
-          <i className="fa-solid fa-at"></i>Mentions & reactions
-        </div>
+        <Link to="threads">
+          <div className="threads">
+            <i className="fa-regular fa-comment-dots"></i>Threads
+          </div>
+        </Link>
+        <Link to="direct_messages">
+          <div className="direct-message">
+            <i className="fa-regular fa-comments"></i>Direct messages
+          </div>
+        </Link>
+        <Link to="mentions_and_reactions">
+          <div className="mentions">
+            <i className="fa-solid fa-at"></i>Mentions & reactions
+          </div>
+        </Link>
         <div className="more">
           <i className="fa-solid fa-ellipsis-vertical"></i>More
         </div>

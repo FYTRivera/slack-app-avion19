@@ -2,12 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../../styles/dashboard/message.css";
 
-const Message: React.FC = () => {
+const DirectMessages: React.FC = () => {
   return (
-    <Link to="messages" className="messages">
-      Message
-    </Link>
+    <h1>Messages</h1>
   );
 };
 
-export default Message;
+export default DirectMessages;

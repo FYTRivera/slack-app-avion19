@@ -1,7 +1,10 @@
 import React, { Fragment } from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Sidebar from "./pages/sidebar";
-import Message from "./pages/message";
+import Threads from "./pages/threads";
+import DirectMessages from "./pages/message";
+import MentionsAndReactions from "./pages/mentions_and_reactions";
+import AllChannels from "./pages/allChannels";
 import "../../styles/dashboard/index.css";
 
 const Dashboard: React.FC = () => {
@@ -9,7 +12,10 @@ const Dashboard: React.FC = () => {
     <div className="dashboard">
       <Sidebar />
       <Routes>
-        <Route path="messages" element={<Message />} />
+        <Route path="threads" element={<Threads />} />
+        <Route path="direct_messages" element={<DirectMessages />} />
+        <Route path="mentions_and_reactions" element={<MentionsAndReactions />} />
+        <Route path="allchannels" element={<AllChannels />} />
       </Routes>
     </div>
   );

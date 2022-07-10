@@ -21,8 +21,8 @@ const App: React.FC = () => {
       <Route element={<PrivateRoutes />}>
         <Route path="/dashboard/*" element={<Dashboard />} />
       </Route>
-      <Route path="signin" element={<Signin setIsLoggedIn={setIsLoggedIn} />} />
-      <Route path="signup" element={<Signup />} />
+      <Route path="/signin" element={<Signin setIsLoggedIn={setIsLoggedIn} />} />
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   );
 };

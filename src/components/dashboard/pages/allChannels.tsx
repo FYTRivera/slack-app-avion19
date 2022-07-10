@@ -1,7 +1,7 @@
 // import React from "react";
 
 const AllChannels: React.FC = () => {
-  return <div></div>;
+  return <div>All Channels</div>;
 };
 
 export default AllChannels;
