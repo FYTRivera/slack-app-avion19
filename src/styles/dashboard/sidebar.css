@@ -52,6 +52,7 @@
   user-select: none;
   display: flex;
   gap: 0.5rem;
+  text-decoration: none;
 }
 .sidebar .options .threads i,
 .sidebar .options .direct-message i,

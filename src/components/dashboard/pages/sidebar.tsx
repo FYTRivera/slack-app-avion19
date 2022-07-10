@@ -4,7 +4,6 @@ import "../../../styles/dashboard/sidebar.css";
 
 const Sidebar: React.FC = () => {
   const channelList = useRef(null);
-  const inputChecked = useRef(null);
   const [chHeight, setChHeight] = useState("");
 
   const onLogOut = () => {
@@ -31,15 +30,15 @@ const Sidebar: React.FC = () => {
         </span>
       </Link>
       <div className="options">
-        <div className="threads">
+        <Link to="threads" className="threads">
           <i className="fa-regular fa-comment-dots"></i>Threads
-        </div>
-        <div className="direct-message">
+        </Link>
+        <Link to="direct_messages" className="direct-message">
           <i className="fa-regular fa-comments"></i>Direct messages
-        </div>
-        <div className="mentions">
+        </Link>
+        <Link to="mentions_and_reactions" className="mentions">
           <i className="fa-solid fa-at"></i>Mentions & reactions
-        </div>
+        </Link>
         <div className="more">
           <i className="fa-solid fa-ellipsis-vertical"></i>More
         </div>
