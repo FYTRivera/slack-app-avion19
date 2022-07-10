@@ -1,0 +1,54 @@
+@use "../app.scss" as *;
+
+.all-channels {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .title {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  }
+
+  .input {
+    padding: 1rem 2vw;
+    width: auto;
+    position: relative;
+
+    .fa-magnifying-glass {
+      position: absolute;
+      transform: translateX(15px) translateY(15px);
+    }
+
+    input {
+      width: 100%;
+      font-size: 15px;
+      padding: 0.8rem 2.5rem;
+      border-radius: 5px;
+      border: 1px solid gray;
+      outline: none;
+
+      &:hover {
+        border: 1px solid black;
+      }
+
+      &:focus {
+        box-shadow: 0px 0px 0px 4px rgba(24, 161, 240, 0.5);
+      }
+    }
+  }
+
+  .channel-lists {
+    padding: 1rem;
+    border: 1px solid black;
+
+    .counter-channels {
+      color: rgb(68, 68, 68);
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+    }
+  }
+}

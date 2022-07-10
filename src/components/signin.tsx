@@ -6,9 +6,14 @@ import "../styles/signin.css";
 
 interface signInProp {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  setToken: React.Dispatch<React.SetStateAction<string>>;
+  setClient: React.Dispatch<React.SetStateAction<string>>;
+  setExpiry: React.Dispatch<React.SetStateAction<string>>;
+  setUid: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Signin: React.FC<signInProp> = ({ setIsLoggedIn }) => {
+const Signin: React.FC<signInProp> = (props) => {
+  const { setIsLoggedIn, setToken, setClient, setExpiry, setUid } = props;
   const [signUser, setSignUser] = useState({
     email: "",
     password: "",
@@ -29,13 +34,17 @@ const Signin: React.FC<signInProp> = ({ setIsLoggedIn }) => {
 
     try {
       const fetch = await signInAPI(signUser);
+      const response = await fetch.json();
 
-      if (fetch.data) {
+      if (response.data) {
         setIsLoggedIn(true);
-      } else if (!fetch.success) {
+        setToken(fetch.headers.get("access-token"));
+        setClient(fetch.headers.get("client"));
+        setExpiry(fetch.headers.get("expiry"));
+        setUid(fetch.headers.get("uid"));
+      } else if (!response.success) {
         errorRef.current.classList.add("animation");
-        console.log(fetch)
-        setError(fetch.errors[0]);
+        setError(response.errors[0]);
       }
     } catch {
       errorRef.current.classList.add("animation");

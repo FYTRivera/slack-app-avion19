@@ -7,7 +7,19 @@ import PrivateRoutes from "./privateRoutes";
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState("");
+  const [client, setClient] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [uid, setUid] = useState("");
+
   const navigate = useNavigate();
+
+  useState(() => {
+    console.log("token :", token);
+    console.log("client :", client);
+    console.log("expiry :", expiry);
+    console.log("uid :", uid);
+  });
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -21,7 +33,18 @@ const App: React.FC = () => {
       <Route element={<PrivateRoutes />}>
         <Route path="/dashboard/*" element={<Dashboard />} />
       </Route>
-      <Route path="signin" element={<Signin setIsLoggedIn={setIsLoggedIn} />} />
+      <Route
+        path="signin"
+        element={
+          <Signin
+            setIsLoggedIn={setIsLoggedIn}
+            setToken={setToken}
+            setClient={setClient}
+            setExpiry={setExpiry}
+            setUid={setUid}
+          />
+        }
+      />
       <Route path="signup" element={<Signup />} />
     </Routes>
   );

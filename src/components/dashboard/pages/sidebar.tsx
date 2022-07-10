@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "../../../styles/dashboard/sidebar.css";
 
 const Sidebar: React.FC = () => {
@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
   };
 
   const channelHandler = () => {
-    if (channelList.current.clientHeight == 0) {
+    if (channelList.current.clientHeight === 0) {
       setChHeight("100px");
       channelList.current.style.height = chHeight;
     } else {
@@ -24,7 +24,12 @@ const Sidebar: React.FC = () => {
 
   return (
     <div className="sidebar">
-      <div className="title">Avion School</div>
+      <Link to="/dashboard" className="title">
+        Avion School<i className="fa-solid fa-angle-down"></i>
+        <span className="pen-square">
+          <i className="fa-solid fa-pen-to-square"></i>
+        </span>
+      </Link>
       <div className="options">
         <div className="threads">
           <i className="fa-regular fa-comment-dots"></i>Threads
@@ -53,9 +58,12 @@ const Sidebar: React.FC = () => {
           </span>
         </label>
         <div className="channel-list" ref={channelList}>
-          <Link to="allchannels" className="browse-channels">
+          <NavLink to="channels" className="browse-channels">
             <i className="fa-solid fa-square-plus"></i>Browse channels
-          </Link>
+          </NavLink>
+          <NavLink to="test" className="new">
+            <i className="fa-solid fa-square-plus"></i>TEST
+          </NavLink>
         </div>
       </div>
       <div className="direct-message"></div>

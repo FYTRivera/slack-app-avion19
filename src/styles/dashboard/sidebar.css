@@ -1,10 +1,10 @@
 .sidebar {
-  border: 1px solid black;
   background-color: rgb(70, 30, 70);
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 30vmin;
+  overflow: hidden;
 }
 .sidebar .title {
   color: white;
@@ -13,6 +13,25 @@
   padding: 0.8rem 1rem;
   cursor: pointer;
   user-select: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.sidebar .title .pen-square {
+  position: absolute;
+  right: 10px;
+  border-radius: 1rem;
+  background: white;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar .title .pen-square .fa-pen-to-square {
+  color: rgb(68, 68, 68);
 }
 .sidebar .title:hover {
   background-color: rgb(52, 22, 52);
@@ -61,7 +80,7 @@
   align-items: center;
   gap: 0.5rem;
   position: relative;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
 }
 .sidebar .channels .label-channel:hover .add-channel {
   opacity: 1;
@@ -72,7 +91,7 @@
   justify-content: center;
   width: 1rem;
   height: 1rem;
-  transition: transform 0.1s;
+  transition: transform 0.2s;
 }
 .sidebar .channels .label-channel .channel {
   display: flex;
@@ -85,6 +104,11 @@
   right: 10px;
   opacity: 0;
   transition: opacity 0.3s ease-out;
+  padding: 0.4rem;
+  border-radius: 3px;
+}
+.sidebar .channels .label-channel .add-channel:hover {
+  background-color: rgba(128, 128, 128, 0.3);
 }
 .sidebar .channels .label-channel .add-channel i {
   display: flex;
@@ -107,7 +131,7 @@
 }
 .sidebar .channels .channel-list .browse-channels {
   font-size: 0.8rem;
-  padding: 0.2rem 1.1rem;
+  padding: 0.3rem 1.1rem;
   cursor: pointer;
   display: flex;
   gap: 0.7rem;
@@ -115,13 +139,36 @@
   text-decoration: none;
   color: rgb(180, 180, 180);
 }
-.sidebar .channels .channel-list .browse-channels:hover {
+.sidebar .channels .channel-list .browse-channels .fa-square-plus {
+  font-size: 1rem;
+}
+.sidebar .channels .channel-list .browse-channels:hover:not(.active) {
+  background-color: rgb(52, 22, 52);
+}
+.sidebar .channels .channel-list .new {
+  font-size: 0.8rem;
+  padding: 0.3rem 1.1rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  text-decoration: none;
+  color: rgb(180, 180, 180);
+}
+.sidebar .channels .channel-list .new .fa-square-plus {
+  font-size: 1rem;
+}
+.sidebar .channels .channel-list .new:hover:not(.active) {
   background-color: rgb(52, 22, 52);
 }
 .sidebar .logout {
   position: absolute;
   bottom: 20px;
   margin: 1rem;
+}
+.sidebar .active {
+  color: white;
+  background: rgb(36, 81, 133);
 }
 
 /*# sourceMappingURL=sidebar.css.map */
