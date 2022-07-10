@@ -4,7 +4,124 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 25vmin;
+  width: 30vmin;
+}
+.sidebar .title {
+  color: white;
+  border: 1px 0px 1px 0px solid red;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+.sidebar .title:hover {
+  background-color: rgb(52, 22, 52);
+}
+.sidebar .options {
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+.sidebar .options .threads,
+.sidebar .options .direct-message,
+.sidebar .options .mentions,
+.sidebar .options .more {
+  padding: 0.2rem 1rem;
+  color: rgb(180, 180, 180);
+  font-family: "Noto Sans", sans-serif;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  gap: 0.5rem;
+}
+.sidebar .options .threads i,
+.sidebar .options .direct-message i,
+.sidebar .options .mentions i,
+.sidebar .options .more i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+}
+.sidebar .options .threads:hover,
+.sidebar .options .direct-message:hover,
+.sidebar .options .mentions:hover,
+.sidebar .options .more:hover {
+  background-color: rgb(52, 22, 52);
+}
+.sidebar .channels {
+  color: rgb(180, 180, 180);
+  padding: 1rem 0;
+  user-select: none;
+}
+.sidebar .channels .label-channel {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  padding: 0 1rem;
+}
+.sidebar .channels .label-channel:hover .add-channel {
+  opacity: 1;
+}
+.sidebar .channels .label-channel .fa-caret-down {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.1s;
+}
+.sidebar .channels .label-channel .channel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+}
+.sidebar .channels .label-channel .add-channel {
+  position: absolute;
+  right: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+.sidebar .channels .label-channel .add-channel i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+.sidebar .channels .label-channel input {
+  display: none;
+}
+.sidebar .channels .label-channel input:checked ~ .fa-caret-down {
+  transform: rotate(-90deg);
+}
+.sidebar .channels .channel-list {
+  display: block;
+  height: 100px;
+  overflow: hidden;
+  transition: height 0.2s;
+}
+.sidebar .channels .channel-list .browse-channels {
+  font-size: 0.8rem;
+  padding: 0.2rem 1.1rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  text-decoration: none;
+  color: rgb(180, 180, 180);
+}
+.sidebar .channels .channel-list .browse-channels:hover {
+  background-color: rgb(52, 22, 52);
+}
+.sidebar .logout {
+  position: absolute;
+  bottom: 20px;
+  margin: 1rem;
 }
 
 /*# sourceMappingURL=sidebar.css.map */
