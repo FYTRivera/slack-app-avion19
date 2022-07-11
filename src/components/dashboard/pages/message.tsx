@@ -31,15 +31,15 @@ interface messageProp {
 
 const DirectMessages: React.FC<messageProp> = (props) => {
 
+  const { token, client, expiry, uid, signInData } = props; 
+
   const [directMessage, setDirectMessage] = useState({
-    receiver: null,
+    receiver: 0,
     receiver_class: "User",
     body: ""
   });
 
-  const { token, client, expiry, uid, signInData } = props; 
-  const receiver_id = useRef();
-  const message_body = useRef();
+  const [receivedMessages, setReceivedMessages] = useState([])
 
   console.log(signInData.id)
   console.log(directMessage)
@@ -74,7 +74,7 @@ async function handleMessageSend(e: any){
       
       console.log(fetch)
       console.log(fetch.data)
-
+      
     } else if (!fetch.success) {
       
       console.log(fetch, "failed")
@@ -88,7 +88,7 @@ async function handleMessageSend(e: any){
 //////////////////////////////////////////////RECEIVED MESSAGES////////////////////////////////////////////////
 const receiveMessageAPI = async (e: any) => {
   return (
-    await fetch(`http://206.189.91.54/api/v1/messages?receiver_id=2242&receiver_class=User`, {
+    await fetch(`http://206.189.91.54/api/v1/messages?receiver_id=${directMessage.receiver}&receiver_class=User`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -116,6 +116,7 @@ async function handleMessageReceive(e: any){
       
       console.log(fetch)
       console.log(fetch.data)
+      setReceivedMessages(fetch.data)
 
     } else if (!fetch.success) {
       
@@ -125,6 +126,8 @@ async function handleMessageReceive(e: any){
   } catch {
     
   }
+  console.log(receivedMessages[0], '<- sender')
+  console.log(receivedMessages[0], '<- receiver')
 };
 
 /////////////////////////////////////////RECEIVED MESSAGES//////////////////////////////////////////////
@@ -135,31 +138,36 @@ async function handleMessageReceive(e: any){
       <div>
         <h1>Messages</h1>
       </div>
+      
       <div>
-        <p>Send Message</p>
-      </div>
-      <div>
+        <p>Contact ID: </p>
         <input 
-          ref={receiver_id} 
+          value={directMessage.receiver}
           type="number" 
           placeholder="ID of Recipient" 
           onChange={((e: any)=>setDirectMessage({...directMessage, receiver: e.target.value}))}>
         </input>
       </div>
       <div>
+        <p>Received Messages</p>
+        <button onClick={handleMessageReceive}>REFRESH</button>
+        <ul>
+          {receivedMessages.map((message,index)=>
+          (message.sender.id==directMessage.receiver
+          ?(<li key={index} className="received-message">{message.body}<h6>received</h6></li>)
+          : (<li key={index} className="sent-message">{message.body}<h6>sent</h6></li>)))}
+        </ul>
+      </div>
+      <div>
+        <p>Send Message</p>
+      </div>
+      <div>
         <input 
-          ref={message_body} 
           type="text" 
           placeholder="Message..." 
           onChange={((e: any)=>setDirectMessage({...directMessage, body: e.target.value}))}>
         </input>
-      </div>
-      <div>
         <button onClick={handleMessageSend}>SEND</button>
-      </div>
-      <div>
-        <p>Received Messages</p>
-        <button onClick={handleMessageReceive}>TEST RECEIVE</button>
       </div>
     </div>
     </>
