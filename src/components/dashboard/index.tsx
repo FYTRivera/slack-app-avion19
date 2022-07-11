@@ -13,11 +13,14 @@ interface dashboardProp {
   client: string;
   expiry: string;
   uid: string;
+  signInData: {
+    id?: number
+  }
 }
 
 const Dashboard: React.FC<dashboardProp> = (props) => {
 
-  const { token, client, expiry, uid } = props;
+  const { token, client, expiry, uid, signInData } = props;
 
   return (
     <div className="dashboard">
@@ -32,6 +35,7 @@ const Dashboard: React.FC<dashboardProp> = (props) => {
             client={client}
             expiry={expiry}
             uid={uid}
+            signInData={signInData}
             />
           } 
         />

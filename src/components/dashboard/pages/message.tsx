@@ -24,6 +24,9 @@ interface messageProp {
   client: string;
   expiry: string;
   uid: string;
+  signInData: {
+    id?: number
+  }
 }
 
 const DirectMessages: React.FC<messageProp> = (props) => {
@@ -34,10 +37,11 @@ const DirectMessages: React.FC<messageProp> = (props) => {
     body: ""
   });
 
-  const { token, client, expiry, uid } = props; 
+  const { token, client, expiry, uid, signInData } = props; 
   const receiver_id = useRef();
   const message_body = useRef();
 
+  console.log(signInData.id)
   console.log(directMessage)
 
   const sendMessageAPI = async (e: any) => {
@@ -81,6 +85,50 @@ async function handleMessageSend(e: any){
   }
 };
 
+//////////////////////////////////////////////RECEIVED MESSAGES////////////////////////////////////////////////
+const receiveMessageAPI = async (e: any) => {
+  return (
+    await fetch(`http://206.189.91.54/api/v1/messages?receiver_id=2242&receiver_class=User`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "access-token": token,
+        "client": client,
+        "expiry": expiry,
+        "uid": uid,
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({
+      //   receiver_id: directMessage.receiver,
+      //   receiver_class: directMessage.receiver_class,
+      //   body: directMessage.body
+      // }),
+    })
+  ).json();
+};
+
+async function handleMessageReceive(e: any){
+  e.preventDefault();
+  try {
+    const fetch = await receiveMessageAPI(directMessage);
+
+    if (fetch.data) {
+      
+      console.log(fetch)
+      console.log(fetch.data)
+
+    } else if (!fetch.success) {
+      
+      console.log(fetch, "failed")
+      
+    }
+  } catch {
+    
+  }
+};
+
+/////////////////////////////////////////RECEIVED MESSAGES//////////////////////////////////////////////
+
   return (
     <>
     <div>
@@ -107,10 +155,11 @@ async function handleMessageSend(e: any){
         </input>
       </div>
       <div>
-        <button onClick={handleMessageSend}>TEST</button>
+        <button onClick={handleMessageSend}>SEND</button>
       </div>
       <div>
         <p>Received Messages</p>
+        <button onClick={handleMessageReceive}>TEST RECEIVE</button>
       </div>
     </div>
     </>
