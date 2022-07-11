@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { Route, Routes, Link } from "react-router-dom";
+import React, { PropsWithChildren } from "react";
+import { Route, Routes } from "react-router-dom";
 import Sidebar from "./pages/sidebar";
 import Threads from "./pages/threads";
 import DirectMessages from "./pages/message";
@@ -9,6 +9,7 @@ import "../../styles/dashboard/index.css";
 import BrowseChannels from "./pages/browseChannels";
 
 const Dashboard: React.FC = () => {
+
   return (
     <div className="dashboard">
       <Sidebar />

@@ -5,21 +5,23 @@ import Signin from "./components/signin";
 import Signup from "./components/signup";
 import PrivateRoutes from "./privateRoutes";
 
+export const Auth = React.createContext(null);
+
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
   const [client, setClient] = useState("");
   const [expiry, setExpiry] = useState("");
   const [uid, setUid] = useState("");
+  const userData = { token, client, expiry, uid };
 
   const navigate = useNavigate();
 
-  useState(() => {
-    console.log("token :", token);
-    console.log("client :", client);
-    console.log("expiry :", expiry);
-    console.log("uid :", uid);
-  });
+  // console.log("token :", token);
+  // console.log("client :", client);
+  // console.log("expiry :", expiry);
+  // console.log("uid :", uid);
+  // console.log(userData);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -29,24 +31,37 @@ const App: React.FC = () => {
   }, [isLoggedIn]);
 
   return (
-    <Routes>
-      <Route element={<PrivateRoutes />}>
-        <Route path="/dashboard/*" element={<Dashboard />} />
-      </Route>
-      <Route
-        path="signin"
-        element={
-          <Signin
-            setIsLoggedIn={setIsLoggedIn}
-            setToken={setToken}
-            setClient={setClient}
-            setExpiry={setExpiry}
-            setUid={setUid}
+    <Auth.Provider value={userData}>
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route
+            path="/dashboard/*"
+            element={
+              <Dashboard
+              // token={token}
+              // client={client}
+              // expiry={expiry}
+              // uid={uid}
+              />
+            }
           />
-        }
-      />
-      <Route path="signup" element={<Signup />} />
-    </Routes>
+        </Route>
+
+        <Route
+          path="signin"
+          element={
+            <Signin
+              setIsLoggedIn={setIsLoggedIn}
+              setToken={setToken}
+              setClient={setClient}
+              setExpiry={setExpiry}
+              setUid={setUid}
+            />
+          }
+        />
+        <Route path="signup" element={<Signup />} />
+      </Routes>
+    </Auth.Provider>
   );
 };
 

@@ -30,12 +30,34 @@ const signInAPI = async (signUser: any) => {
   });
 };
 
-const getChannels = async () => {
+const getChannels = async (userData: any) => {
   return (
     await fetch("http://206.189.91.54/api/v1/channels", {
       method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "access-token": userData.token,
+        client: userData.client,
+        expiry: userData.expiry,
+        uid: userData.uid,
+      },
     })
   ).json();
 };
 
-export { signUpAPI, signInAPI, getChannels };
+const getChannelDetails = async (userData: any, id: any) => {
+  return (
+    await fetch(`http://206.189.91.54/api/v1/channels/${id}`, {
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "access-token": userData.token,
+        client: userData.client,
+        expiry: userData.expiry,
+        uid: userData.uid,
+      },
+    })
+  ).json();
+};
+
+export { signUpAPI, signInAPI, getChannels, getChannelDetails };

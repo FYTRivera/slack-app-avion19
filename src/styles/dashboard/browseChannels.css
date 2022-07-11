@@ -59,14 +59,53 @@ body {
   box-shadow: 0px 0px 0px 4px rgba(24, 161, 240, 0.5);
 }
 .all-channels .channel-lists {
-  padding: 1rem;
-  border: 1px solid black;
+  padding: 1rem 1rem 0rem 1rem;
 }
 .all-channels .channel-lists .counter-channels {
   color: rgb(68, 68, 68);
   padding: 0.5rem;
   font-size: 0.8rem;
   border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+.all-channels .display-channels {
+  padding: 0rem 1rem 1rem 1rem;
+  overflow-y: scroll;
+}
+.all-channels .display-channels::-webkit-scrollbar {
+  width: 9px;
+}
+.all-channels .display-channels::-webkit-scrollbar-thumb {
+  background: rgb(128, 128, 128);
+  border-radius: 1rem;
+  height: 5px;
+}
+.all-channels .display-channels .channel {
+  cursor: pointer;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+.all-channels .display-channels .channel .channel-name {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.all-channels .display-channels .channel .channel-name .fa-unlock-keyhole {
+  font-size: 0.9rem;
+}
+.all-channels .display-channels .channel .channel-members {
+  font-size: 0.7rem;
+  color: rgba(128, 128, 128, 0.8);
+}
+.all-channels .display-channels .channel:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+.all-channels .display-channels .no-channel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(128, 128, 128, 0.8);
+  padding: 1rem;
 }
 
 /*# sourceMappingURL=browseChannels.css.map */
