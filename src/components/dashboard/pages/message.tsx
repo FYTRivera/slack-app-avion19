@@ -1,10 +1,119 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../../../styles/dashboard/message.css";
 
-const DirectMessages: React.FC = () => {
+//////ACCOUNT DETAILS//////
+
+//MAKI's account
+// id: 2242, 
+// email: 'junmark123@chi.com', 
+// provider: 'email', 
+// uid: 'junmark123@chi.com'
+
+// FRANCO's account
+// id: 2243, 
+// email: 'franco123@rivera.com', 
+// provider: 'email', 
+// uid: 'franco123@rivera.com'
+
+//////ACCOUNT DETAILS//////
+
+
+interface messageProp {
+  token: string;
+  client: string;
+  expiry: string;
+  uid: string;
+}
+
+const DirectMessages: React.FC<messageProp> = (props) => {
+
+  const [directMessage, setDirectMessage] = useState({
+    receiver: null,
+    receiver_class: "User",
+    body: ""
+  });
+
+  const { token, client, expiry, uid } = props; 
+  const receiver_id = useRef();
+  const message_body = useRef();
+
+  console.log(directMessage)
+
+  const sendMessageAPI = async (e: any) => {
+    return (
+      await fetch("http://206.189.91.54/api/v1/messages", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "access-token": token,
+          "client": client,
+          "expiry": expiry,
+          "uid": uid,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          receiver_id: directMessage.receiver,
+          receiver_class: directMessage.receiver_class,
+          body: directMessage.body
+        }),
+      })
+    ).json();
+  };
+
+async function handleMessageSend(e: any){
+  e.preventDefault();
+  try {
+    const fetch = await sendMessageAPI(directMessage);
+
+    if (fetch.data) {
+      
+      console.log(fetch)
+      console.log(fetch.data)
+
+    } else if (!fetch.success) {
+      
+      console.log(fetch, "failed")
+      
+    }
+  } catch {
+    
+  }
+};
+
   return (
-    <h1>Messages</h1>
+    <>
+    <div>
+      <div>
+        <h1>Messages</h1>
+      </div>
+      <div>
+        <p>Send Message</p>
+      </div>
+      <div>
+        <input 
+          ref={receiver_id} 
+          type="number" 
+          placeholder="ID of Recipient" 
+          onChange={((e: any)=>setDirectMessage({...directMessage, receiver: e.target.value}))}>
+        </input>
+      </div>
+      <div>
+        <input 
+          ref={message_body} 
+          type="text" 
+          placeholder="Message..." 
+          onChange={((e: any)=>setDirectMessage({...directMessage, body: e.target.value}))}>
+        </input>
+      </div>
+      <div>
+        <button onClick={handleMessageSend}>TEST</button>
+      </div>
+      <div>
+        <p>Received Messages</p>
+      </div>
+    </div>
+    </>
   );
 };
 

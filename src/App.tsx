@@ -38,10 +38,10 @@ const App: React.FC = () => {
             path="/dashboard/*"
             element={
               <Dashboard
-              // token={token}
-              // client={client}
-              // expiry={expiry}
-              // uid={uid}
+                token={token}
+                client={client}
+                expiry={expiry}
+                uid={uid}
               />
             }
           />

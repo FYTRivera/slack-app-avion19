@@ -42,6 +42,7 @@ const Signin: React.FC<signInProp> = (props) => {
         setClient(fetch.headers.get("client"));
         setExpiry(fetch.headers.get("expiry"));
         setUid(fetch.headers.get("uid"));
+        console.log(response.data)//logs response.data
       } else if (!response.success) {
         errorRef.current.classList.add("animation");
         setError(response.errors[0]);
