@@ -127,13 +127,9 @@ const DirectMessages: FC<messageProp> = (props) => {
 
   return (
     <>
-      <div>
-        <div>
-          <h1>Messages</h1>
-        </div>
-
-        <div>
-          <p>Contact ID: </p>
+      <div className="messages-div">
+        <div className="top-message-div">
+          <label>Contact ID#: </label>
           <input
             value={directMessage.receiver}
             type="number"
@@ -142,39 +138,40 @@ const DirectMessages: FC<messageProp> = (props) => {
               setDirectMessage({ ...directMessage, receiver: e.target.value })
             }
           ></input>
+          <h2>User #{directMessage.receiver}</h2>
+          {/* <button onClick={handleMessageReceive}>REFRESH</button> */}
         </div>
         <div>
-          <p>Received Messages</p>
-          <button onClick={handleMessageReceive}>REFRESH</button>
           <ul>
             <p className="error">{error}</p>
             {receivedMessages.map((message, index) =>
               message.sender.id == directMessage.receiver ? (
-                <li key={index} className="received-message">
-                  {message.body}
-                  <h6>received</h6>
-                </li>
+                <div className="received-message-div">
+                  <li key={index} className="received-message">
+                    {message.body}
+                    <h6>received</h6>
+                  </li>
+                </div>
               ) : (
-                <li key={index} className="sent-message">
-                  {message.body}
-                  <h6>sent</h6>
-                </li>
+                <div className="sent-message-div">
+                  <li key={index} className="sent-message">
+                    {message.body}
+                    <h6>sent</h6>
+                  </li>
+                </div>
               )
             )}
           </ul>
         </div>
-        <div>
-          <p>Send Message</p>
-        </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Message..."
-            onChange={(e: any) =>
-              setDirectMessage({ ...directMessage, body: e.target.value })
-            }
-          ></input>
-          <button onClick={handleMessageSend}>SEND</button>
+        <div className="send-message-div">
+            <input
+              type="text"
+              placeholder="Message..."
+              onChange={(e: any) =>
+                setDirectMessage({ ...directMessage, body: e.target.value })
+              }
+            ></input>
+            <button onClick={handleMessageSend}>SEND</button>
         </div>
       </div>
     </>
