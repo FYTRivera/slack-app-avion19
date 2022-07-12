@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "./pages/sidebar";
 import Threads from "./pages/threads";
@@ -7,6 +7,7 @@ import MentionsAndReactions from "./pages/mentions_and_reactions";
 import AllChannels from "./pages/allChannels";
 import "../../styles/dashboard/index.css";
 import BrowseChannels from "./pages/browseChannels";
+import Modal from "./createChannelModal";
 
 interface dashboardProp {
   token: string;
@@ -20,10 +21,12 @@ interface dashboardProp {
 
 const Dashboard: FC<dashboardProp> = (props) => {
   const { token, client, expiry, uid, signInData } = props;
+  const [onModal, setOnModal] = useState(false);
 
   return (
     <div className="dashboard">
-      <Sidebar />
+      {onModal && <Modal setOnModal={setOnModal} />}
+      <Sidebar setOnModal={setOnModal} />
       <Routes>
         <Route path="channels" element={<BrowseChannels />} />
         <Route path="threads" element={<Threads />} />

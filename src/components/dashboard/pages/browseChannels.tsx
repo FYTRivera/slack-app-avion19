@@ -42,7 +42,7 @@ const BrowseChannels: FC = () => {
     if (channels) {
       return channels.map((user, index) => {
         const test = getChannelDetails(userData, user.id);
-        console.log(test);
+        // console.log(test);
 
         return (
           <div key={index} className="channel">

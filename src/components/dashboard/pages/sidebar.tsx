@@ -1,8 +1,12 @@
-import React, { useRef, useState, FC } from "react";
+import { useRef, useState, FC } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../../../styles/dashboard/sidebar.css";
 
-const Sidebar: FC = () => {
+interface SidebarProps {
+  setOnModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Sidebar: FC<SidebarProps> = ({ setOnModal }) => {
   const channelList = useRef(null);
   const [chHeight, setChHeight] = useState("");
 
@@ -19,6 +23,10 @@ const Sidebar: FC = () => {
       setChHeight("0px");
       channelList.current.style.height = chHeight;
     }
+  };
+
+  const openModal = () => {
+    setOnModal(true);
   };
 
   return (
@@ -52,7 +60,7 @@ const Sidebar: FC = () => {
           <input type="checkbox" name="channels" id="channels" />
           <i className="fa-solid fa-caret-down"></i>
           <span className="channel">Channels</span>
-          <span className="add-channel">
+          <span className="add-channel" onClick={openModal}>
             <i className="fa-solid fa-plus"></i>
           </span>
         </label>
