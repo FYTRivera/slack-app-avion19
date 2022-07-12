@@ -10,10 +10,22 @@ interface signInProp {
   setClient: React.Dispatch<React.SetStateAction<string>>;
   setExpiry: React.Dispatch<React.SetStateAction<string>>;
   setUid: React.Dispatch<React.SetStateAction<string>>;
+
+  signInData: {};
+
+  setSignInData: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const Signin: FC<signInProp> = (props) => {
-  const { setIsLoggedIn, setToken, setClient, setExpiry, setUid } = props;
+  const {
+    setIsLoggedIn,
+    setToken,
+    setClient,
+    setExpiry,
+    setUid,
+    signInData,
+    setSignInData,
+  } = props;
   const [signUser, setSignUser] = useState({
     email: "",
     password: "",
@@ -42,6 +54,9 @@ const Signin: FC<signInProp> = (props) => {
         setClient(fetch.headers.get("client"));
         setExpiry(fetch.headers.get("expiry"));
         setUid(fetch.headers.get("uid"));
+        console.log(response.data, "response data"); //logs response.data
+        setSignInData(response.data);
+        console.log(signInData, "sign in data");
       } else if (!response.success) {
         errorRef.current.classList.add("animation");
         setError(response.errors[0]);

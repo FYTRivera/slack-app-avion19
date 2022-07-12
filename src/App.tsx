@@ -15,6 +15,8 @@ const App: FC = () => {
   const [uid, setUid] = useState("");
   const userData = { token, client, expiry, uid };
 
+  const [signInData, setSignInData] = useState({})
+
   const navigate = useNavigate();
 
   // console.log("token :", token);
@@ -22,6 +24,8 @@ const App: FC = () => {
   // console.log("expiry :", expiry);
   // console.log("uid :", uid);
   // console.log(userData);
+
+  console.log(signInData)
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -38,10 +42,11 @@ const App: FC = () => {
             path="/dashboard/*"
             element={
               <Dashboard
-              // token={token}
-              // client={client}
-              // expiry={expiry}
-              // uid={uid}
+                token={token}
+                client={client}
+                expiry={expiry}
+                uid={uid}
+                signInData={signInData}
               />
             }
           />
@@ -56,6 +61,8 @@ const App: FC = () => {
               setClient={setClient}
               setExpiry={setExpiry}
               setUid={setUid}
+              signInData={signInData}
+              setSignInData={setSignInData}
             />
           }
         />
