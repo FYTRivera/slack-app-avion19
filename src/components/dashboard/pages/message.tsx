@@ -32,14 +32,18 @@ interface messageProp {
 const DirectMessages: React.FC<messageProp> = (props) => {
 
   const { token, client, expiry, uid, signInData } = props; 
-
+  
   const [directMessage, setDirectMessage] = useState({
-    receiver: 0,
+    receiver: window.localStorage.getItem('lastAccount')||2243,
     receiver_class: "User",
     body: ""
   });
 
+  window.localStorage.setItem('lastAccount', directMessage.receiver.toString());
+
   const [receivedMessages, setReceivedMessages] = useState([])
+
+  const [error, setError] = useState("")
 
   console.log(signInData.id)
   console.log(directMessage)
@@ -74,11 +78,12 @@ async function handleMessageSend(e: any){
       
       console.log(fetch)
       console.log(fetch.data)
+      setError("")
       
     } else if (!fetch.success) {
       
       console.log(fetch, "failed")
-      
+      setError(fetch.errors)
     }
   } catch {
     
@@ -107,8 +112,8 @@ const receiveMessageAPI = async (e: any) => {
   ).json();
 };
 
-async function handleMessageReceive(e: any){
-  e.preventDefault();
+async function handleMessageReceive(){
+
   try {
     const fetch = await receiveMessageAPI(directMessage);
 
@@ -117,19 +122,24 @@ async function handleMessageReceive(e: any){
       console.log(fetch)
       console.log(fetch.data)
       setReceivedMessages(fetch.data)
+      setError("")
 
     } else if (!fetch.success) {
       
-      console.log(fetch, "failed")
+      console.log(fetch.errors[0], "failed")
+      setReceivedMessages([])
+      setError(fetch.errors)
+      
       
     }
   } catch {
     
   }
-  console.log(receivedMessages[0], '<- sender')
-  console.log(receivedMessages[0], '<- receiver')
+  console.log(error, 'error')
 };
 
+//vvvv attempt at a realtime chat function. ends up lagging
+useEffect(()=>{handleMessageReceive()},[directMessage.receiver]);
 /////////////////////////////////////////RECEIVED MESSAGES//////////////////////////////////////////////
 
   return (
@@ -152,10 +162,11 @@ async function handleMessageReceive(e: any){
         <p>Received Messages</p>
         <button onClick={handleMessageReceive}>REFRESH</button>
         <ul>
-          {receivedMessages.map((message,index)=>
-          (message.sender.id==directMessage.receiver
-          ?(<li key={index} className="received-message">{message.body}<h6>received</h6></li>)
-          : (<li key={index} className="sent-message">{message.body}<h6>sent</h6></li>)))}
+          <p className="error">{error}</p>
+            {receivedMessages.map((message,index)=>
+            (message.sender.id==directMessage.receiver
+            ?(<li key={index} className="received-message">{message.body}<h6>received</h6></li>)
+            : (<li key={index} className="sent-message">{message.body}<h6>sent</h6></li>)))}
         </ul>
       </div>
       <div>
