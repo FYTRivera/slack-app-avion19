@@ -42,11 +42,10 @@ const DirectMessages: React.FC<messageProp> = (props) => {
   window.localStorage.setItem('lastAccount', directMessage.receiver.toString());
 
   const [receivedMessages, setReceivedMessages] = useState([])
+  
+  const [isMessaged, setIsMessaged] = useState(false)
 
   const [error, setError] = useState("")
-
-  console.log(signInData.id)
-  console.log(directMessage)
 
   const sendMessageAPI = async (e: any) => {
     return (
@@ -75,14 +74,13 @@ async function handleMessageSend(e: any){
     const fetch = await sendMessageAPI(directMessage);
 
     if (fetch.data) {
-      
-      console.log(fetch)
-      console.log(fetch.data)
-      setError("")
+
+      setError("");
+      (isMessaged?setIsMessaged(false):setIsMessaged(true))
+
       
     } else if (!fetch.success) {
-      
-      console.log(fetch, "failed")
+
       setError(fetch.errors)
     }
   } catch {
@@ -118,15 +116,12 @@ async function handleMessageReceive(){
     const fetch = await receiveMessageAPI(directMessage);
 
     if (fetch.data) {
-      
-      console.log(fetch)
-      console.log(fetch.data)
+
       setReceivedMessages(fetch.data)
       setError("")
 
     } else if (!fetch.success) {
       
-      console.log(fetch.errors[0], "failed")
       setReceivedMessages([])
       setError(fetch.errors)
       
@@ -135,11 +130,10 @@ async function handleMessageReceive(){
   } catch {
     
   }
-  console.log(error, 'error')
+
 };
 
-//vvvv attempt at a realtime chat function. ends up lagging
-useEffect(()=>{handleMessageReceive()},[directMessage.receiver]);
+useEffect(()=>{handleMessageReceive()},[directMessage.receiver,isMessaged]);
 /////////////////////////////////////////RECEIVED MESSAGES//////////////////////////////////////////////
 
   return (
