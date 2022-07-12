@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, FC } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Dashboard from "./components/dashboard/index";
 import Signin from "./components/signin";
@@ -7,7 +7,7 @@ import PrivateRoutes from "./privateRoutes";
 
 export const Auth = React.createContext(null);
 
-const App: React.FC = () => {
+const App: FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
   const [client, setClient] = useState("");

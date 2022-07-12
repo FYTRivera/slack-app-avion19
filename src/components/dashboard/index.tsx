@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "./pages/sidebar";
 import Threads from "./pages/threads";
@@ -8,8 +8,7 @@ import AllChannels from "./pages/allChannels";
 import "../../styles/dashboard/index.css";
 import BrowseChannels from "./pages/browseChannels";
 
-const Dashboard: React.FC = () => {
-
+const Dashboard: FC = () => {
   return (
     <div className="dashboard">
       <Sidebar />

@@ -1,4 +1,6 @@
-const AllChannels: React.FC = () => {
+import { FC } from "react";
+
+const AllChannels: FC = () => {
   return <div>All Channels</div>;
 };
 

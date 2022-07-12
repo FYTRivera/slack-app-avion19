@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, FC } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { signUpAPI } from "../dataFetching";
 import "../styles/signup.css";
 
-const Signup: React.FC = () => {
+const Signup: FC = () => {
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",

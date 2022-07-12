@@ -1,3 +1,5 @@
+const controller = new AbortController();
+
 const signUpAPI = async (newUser: any) => {
   return (
     await fetch("http://206.189.91.54/api/v1/auth/", {
@@ -33,6 +35,7 @@ const signInAPI = async (signUser: any) => {
 const getChannels = async (userData: any) => {
   return (
     await fetch("http://206.189.91.54/api/v1/channels", {
+      signal: controller.signal,
       method: "GET",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -60,4 +63,4 @@ const getChannelDetails = async (userData: any, id: any) => {
   ).json();
 };
 
-export { signUpAPI, signInAPI, getChannels, getChannelDetails };
+export { signUpAPI, signInAPI, getChannels, getChannelDetails, controller };

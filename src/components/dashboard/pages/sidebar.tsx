@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, FC } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../../../styles/dashboard/sidebar.css";
 
-const Sidebar: React.FC = () => {
+const Sidebar: FC = () => {
   const channelList = useRef(null);
   const [chHeight, setChHeight] = useState("");
 

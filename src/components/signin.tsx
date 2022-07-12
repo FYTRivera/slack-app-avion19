@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, FC } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { signInAPI } from "../dataFetching";
@@ -12,7 +12,7 @@ interface signInProp {
   setUid: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Signin: React.FC<signInProp> = (props) => {
+const Signin: FC<signInProp> = (props) => {
   const { setIsLoggedIn, setToken, setClient, setExpiry, setUid } = props;
   const [signUser, setSignUser] = useState({
     email: "",
