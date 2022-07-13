@@ -68,8 +68,17 @@ body {
   border-bottom: 1px solid rgba(128, 128, 128, 0.3);
 }
 .all-channels .display-channels {
-  padding: 0rem 1rem 1rem 1rem;
+  padding: 0rem 1rem 3rem 1rem;
   overflow-y: scroll;
+  position: relative;
+}
+.all-channels .display-channels .load {
+  color: blue;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+  text-align: center;
 }
 .all-channels .display-channels::-webkit-scrollbar {
   width: 9px;

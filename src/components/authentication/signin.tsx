@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState, FC } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.svg";
-import { signInAPI } from "../dataFetching";
-import "../styles/signin.css";
+import logo from "../../assets/logo.svg";
+import { signInAPI } from "../../utils/dataFetching";
+import "../../styles/signin.css";
+import { HashLoader } from "react-spinners";
 
 interface signInProp {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,9 +11,7 @@ interface signInProp {
   setClient: React.Dispatch<React.SetStateAction<string>>;
   setExpiry: React.Dispatch<React.SetStateAction<string>>;
   setUid: React.Dispatch<React.SetStateAction<string>>;
-
   signInData: {};
-
   setSignInData: React.Dispatch<React.SetStateAction<{}>>;
 }
 
@@ -32,8 +31,8 @@ const Signin: FC<signInProp> = (props) => {
   });
   const [error, setError] = useState("");
   const errorRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  //Hides error message when user types in the form
   useEffect(() => {
     setError("");
     errorRef.current.classList.remove("animation");
@@ -41,7 +40,8 @@ const Signin: FC<signInProp> = (props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setIsLoading(true);
+    setError("");
     error && errorRef.current.classList.remove("animation");
 
     try {
@@ -50,6 +50,8 @@ const Signin: FC<signInProp> = (props) => {
 
       if (response.data) {
         setIsLoggedIn(true);
+        setIsLoading(false);
+
         setToken(fetch.headers.get("access-token"));
         setClient(fetch.headers.get("client"));
         setExpiry(fetch.headers.get("expiry"));
@@ -58,6 +60,7 @@ const Signin: FC<signInProp> = (props) => {
         setSignInData(response.data);
         console.log(signInData, "sign in data");
       } else if (!response.success) {
+        setIsLoading(false);
         errorRef.current.classList.add("animation");
         setError(response.errors[0]);
       }
@@ -71,9 +74,8 @@ const Signin: FC<signInProp> = (props) => {
     <div className="signin">
       <img src={logo}></img>
       <h1>Sign in to your account</h1>
-      <form action="" onSubmit={handleSubmit}>
+      <form action="">
         <input
-          required
           className="email"
           type="email"
           placeholder="Email Address"
@@ -81,7 +83,6 @@ const Signin: FC<signInProp> = (props) => {
           value={signUser.email}
         />
         <input
-          required
           className="password"
           type="password"
           placeholder="Password"
@@ -90,14 +91,20 @@ const Signin: FC<signInProp> = (props) => {
           }
           value={signUser.password}
         />
-        <input type="submit" value="Sign In" className="submit" />
+        <button className="submit-div" onClick={handleSubmit}>
+          <div>
+            {isLoading ? <HashLoader size={19} color="white" /> : "Sign In"}
+          </div>
+        </button>
       </form>
-      <div className="error" ref={errorRef}>
+      <div className="errorSignIn" ref={errorRef}>
         {error}
       </div>
       <div className="footer">
-        <h6>New to Slack?</h6>
-        <Link to="/signup">Create a new account</Link>
+        <h4 className="new-slack">New to Slack?</h4>
+        <Link to="/signup" className="link-signin">
+          Create a new account
+        </Link>
       </div>
     </div>
   );

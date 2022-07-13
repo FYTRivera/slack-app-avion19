@@ -1,10 +1,16 @@
-import React, { useRef, useState, FC } from "react";
+import { useRef, useState, FC, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Auth } from "../../../App";
 import "../../../styles/dashboard/sidebar.css";
 
-const Sidebar: FC = () => {
+interface SidebarProps {
+  setOnModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Sidebar: FC<SidebarProps> = ({ setOnModal }) => {
   const channelList = useRef(null);
   const [chHeight, setChHeight] = useState("");
+  const userData = useContext(Auth);
 
   const onLogOut = () => {
     localStorage.setItem("isLoggedIn", JSON.stringify(false));
@@ -19,6 +25,10 @@ const Sidebar: FC = () => {
       setChHeight("0px");
       channelList.current.style.height = chHeight;
     }
+  };
+
+  const openModal = () => {
+    setOnModal(true);
   };
 
   return (
@@ -52,7 +62,7 @@ const Sidebar: FC = () => {
           <input type="checkbox" name="channels" id="channels" />
           <i className="fa-solid fa-caret-down"></i>
           <span className="channel">Channels</span>
-          <span className="add-channel">
+          <span className="add-channel" onClick={openModal}>
             <i className="fa-solid fa-plus"></i>
           </span>
         </label>
@@ -60,16 +70,16 @@ const Sidebar: FC = () => {
           <NavLink to="channels" className="browse-channels">
             <i className="fa-solid fa-square-plus"></i>Browse channels
           </NavLink>
-          <NavLink to="test" className="new">
-            <i className="fa-solid fa-square-plus"></i>TEST
-          </NavLink>
         </div>
       </div>
       <div className="direct-message"></div>
 
-      <Link to="/signin" onClick={onLogOut} className="logout">
-        Log Out
-      </Link>
+      <div className="footer-logout">
+        <div className="user-email">{userData.uid}</div>
+        <Link to="/signin" onClick={onLogOut} className="logout">
+          Log Out
+        </Link>
+      </div>
     </div>
   );
 };

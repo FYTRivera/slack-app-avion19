@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+<<<<<<< HEAD
 
 label{
     color: lightgray;
@@ -19,17 +20,33 @@ ul{
     margin-bottom: 50px; */
     display: flex;
     flex-direction: column;
+=======
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+>>>>>>> f6f8eb939d7673f03d8b8729d5fdd2ee90a7fa56
 }
 
-li{
-    list-style: none;
-    flex-grow: 0;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans", sans-serif;
 }
 
-h2{
-    margin:0;
+.animation {
+  animation: error 0.04s ease-in-out 0s 6 alternate forwards;
+}
+@keyframes error {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(5px);
+  }
 }
 
+<<<<<<< HEAD
 h5{
     margin:0;
 }
@@ -85,12 +102,68 @@ h6{
     display: flex;
     /* justify-content: center; */
     align-items: center;
+=======
+ul {
+  padding-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  margin: 0;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
-.messages-div{
-    width: 100%;
+li {
+  list-style: none;
+  flex-grow: 0;
 }
 
+h2 {
+  margin: 0;
+}
+
+h6 {
+  margin: 0;
+}
+
+.sent-message {
+  text-align: left;
+  background-color: #c591c5;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.received-message {
+  text-align: right;
+  background-color: #a782a7;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(243, 70, 70);
+  font-size: 0.9rem;
+>>>>>>> f6f8eb939d7673f03d8b8729d5fdd2ee90a7fa56
+}
+
+.send-message-div {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+<<<<<<< HEAD
 .received-message-div{
     align-self:flex-start;
 }
@@ -180,4 +253,26 @@ h6{
       /* margin-top: 0.5rem; */
       margin-left: 0.5rem;
   }
+=======
+.messages-div {
+  width: 100%;
+}
+
+.received-message-div {
+  align-self: flex-end;
+}
+
+.sent-message-div {
+  align-self: flex-start;
+}
+
+.top-message-div {
+  background-color: #6d306d;
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  padding-left: 20px;
+}
+
+>>>>>>> f6f8eb939d7673f03d8b8729d5fdd2ee90a7fa56
 /*# sourceMappingURL=message.css.map */

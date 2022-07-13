@@ -63,8 +63,7 @@ body {
 .signin form .password:hover {
   border: 2px solid #4267b2;
 }
-.signin form .submit {
-  padding: 0.8rem;
+.signin form .submit-div {
   border-radius: 5px;
   background-image: linear-gradient(to right, #0c610c, #497749, #084608);
   background-position: 0%;
@@ -75,15 +74,20 @@ body {
   cursor: pointer;
   transition: background-position 0.3s;
   outline-color: #abb4ab;
+  height: auto;
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 0.5rem;
 }
-.signin form .submit:hover {
+.signin form .submit-div:hover {
   background-position: 50%;
 }
-.signin form .submit:active {
+.signin form .submit-div:active {
   background-position: 100%;
 }
-.signin .error {
+.signin .errorSignIn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,18 +99,20 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 0.5rem;
 }
-.signin .footer h6 {
+.signin .footer .new-slack {
   color: gray;
   font-weight: 100;
+  font-size: 0.7rem;
 }
-.signin .footer a {
+.signin .footer .link-signin {
   text-decoration: none;
   font-size: 0.8rem;
   color: #577fcf;
   font-family: "Roboto", sans-serif;
 }
-.signin .footer a:hover {
+.signin .footer .link-signin:hover {
   text-decoration: underline;
 }
 

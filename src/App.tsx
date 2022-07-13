@@ -1,9 +1,9 @@
 import React, { useEffect, useState, FC } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Dashboard from "./components/dashboard/index";
-import Signin from "./components/signin";
-import Signup from "./components/signup";
-import PrivateRoutes from "./privateRoutes";
+import Signin from "./components/authentication/signin";
+import Signup from "./components/authentication/signup";
+import PrivateRoutes from "./utils/privateRoutes";
 
 export const Auth = React.createContext(null);
 
@@ -15,17 +15,9 @@ const App: FC = () => {
   const [uid, setUid] = useState("");
   const userData = { token, client, expiry, uid };
 
-  const [signInData, setSignInData] = useState({})
+  const [signInData, setSignInData] = useState({});
 
   const navigate = useNavigate();
-
-  // console.log("token :", token);
-  // console.log("client :", client);
-  // console.log("expiry :", expiry);
-  // console.log("uid :", uid);
-  // console.log(userData);
-
-  console.log(signInData)
 
   useEffect(() => {
     if (isLoggedIn) {

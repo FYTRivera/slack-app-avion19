@@ -38,7 +38,6 @@ const getChannels = async (userData: any) => {
       signal: controller.signal,
       method: "GET",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "access-token": userData.token,
         client: userData.client,
         expiry: userData.expiry,
@@ -53,7 +52,6 @@ const getChannelDetails = async (userData: any, id: any) => {
     await fetch(`http://206.189.91.54/api/v1/channels/${id}`, {
       method: "GET",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "access-token": userData.token,
         client: userData.client,
         expiry: userData.expiry,
@@ -63,4 +61,31 @@ const getChannelDetails = async (userData: any, id: any) => {
   ).json();
 };
 
-export { signUpAPI, signInAPI, getChannels, getChannelDetails, controller };
+const createChannel = async (
+  userData: any,
+  createChannelInfo: {
+    name: string;
+    user_ids: any[];
+    description: string;
+  }
+) => {
+  return (
+    await fetch("http://206.189.91.54/api/v1/channels", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "access-token": userData.token,
+        client: userData.client,
+        expiry: userData.expiry,
+        uid: userData.uid,
+      },
+      body: JSON.stringify({
+        name: createChannelInfo.name,
+        user_ids: createChannelInfo.user_ids,
+        description: createChannelInfo.description,
+      }),
+    })
+  ).json();
+};
+
+export { signUpAPI, signInAPI, getChannels, getChannelDetails, createChannel };

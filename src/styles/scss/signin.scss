@@ -41,8 +41,7 @@
       }
     }
 
-    .submit {
-      padding: 0.8rem;
+    .submit-div {
       border-radius: 5px;
       background-image: linear-gradient(to right, #0c610c, #497749, #084608);
       background-position: 0%;
@@ -53,6 +52,11 @@
       cursor: pointer;
       transition: background-position 0.3s;
       outline-color: #abb4ab;
+      height: auto;
+      padding: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-top: 0.5rem;
 
       &:hover {
@@ -65,7 +69,7 @@
     }
   }
 
-  .error {
+  .errorSignIn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,13 +82,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 0.5rem;
 
-    h6 {
+    .new-slack {
       color: gray;
       font-weight: 100;
+      font-size: 0.7rem;
     }
 
-    a {
+    .link-signin {
       text-decoration: none;
       font-size: 0.8rem;
       color: #577fcf;

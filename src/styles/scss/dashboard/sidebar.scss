@@ -1,10 +1,11 @@
 .sidebar {
-  background-color: rgb(70, 30, 70);
+  background-color: #461e46;
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 30vmin;
   overflow: hidden;
+  position: relative;
 
   .title {
     color: white;
@@ -181,10 +182,30 @@
     }
   }
 
-  .logout {
+  .footer-logout {
     position: absolute;
     bottom: 20px;
-    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .user-email {
+      color: rgb(180, 180, 180);
+    }
+
+    .logout {
+      text-decoration: none;
+      color: white;
+      text-align: center;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .active {
