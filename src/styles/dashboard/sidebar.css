@@ -6,6 +6,8 @@
   width: 30vmin;
   overflow: hidden;
   position: relative;
+  position: sticky;
+  top: 0;
 }
 .sidebar .title {
   color: white;
