@@ -1,1 +1,80 @@
-// @use "../app" as *;
+@use "../app" as *;
+
+ul {
+  padding-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  margin: 0;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  list-style: none;
+  flex-grow: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+h6 {
+  margin: 0;
+}
+
+.sent-message {
+  text-align: left;
+  background-color: #c591c5;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.received-message {
+  text-align: right;
+  background-color: #a782a7;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(243, 70, 70);
+  font-size: 0.9rem;
+}
+
+.send-message-div {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.messages-div {
+  width: 100%;
+}
+
+.received-message-div {
+  align-self: flex-end;
+}
+
+.sent-message-div {
+  align-self: flex-start;
+}
+
+.top-message-div {
+  background-color: #6d306d;
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  padding-left: 20px;
+}

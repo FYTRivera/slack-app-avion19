@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState, FC } from "react";
-import { getChannelDetails, getChannels } from "../../../dataFetching";
+import { getChannelDetails, getChannels } from "../../../utils/dataFetching";
 import "../../../styles/dashboard/browseChannels.css";
 import { Auth } from "../../../App";
+import { PulseLoader } from "react-spinners";
 // import Display from "../displayChannels";
 
 const BrowseChannels: FC = () => {
@@ -10,6 +11,7 @@ const BrowseChannels: FC = () => {
   const [members, setMembers] = useState("");
   const [total, setTotal] = useState(0);
   const [id, setId] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     displayChannel();
@@ -20,6 +22,7 @@ const BrowseChannels: FC = () => {
       const fetch = await getChannels(userData);
       const getData = fetch.data;
 
+      setIsLoading(false);
       setChannels(getData);
       setTotal(getData.length);
     } catch (e) {
@@ -75,7 +78,11 @@ const BrowseChannels: FC = () => {
         </div>
       </div>
       <div className="display-channels">
-        <Display />
+        {isLoading ? (
+          <PulseLoader size={15} className="load" color="#461e46" />
+        ) : (
+          <Display />
+        )}
       </div>
     </div>
   );

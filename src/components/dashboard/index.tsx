@@ -4,10 +4,10 @@ import Sidebar from "./pages/sidebar";
 import Threads from "./pages/threads";
 import DirectMessages from "./pages/message";
 import MentionsAndReactions from "./pages/mentions_and_reactions";
-import AllChannels from "./pages/allChannels";
+import Introduction from "./pages/introduction";
 import "../../styles/dashboard/index.css";
 import BrowseChannels from "./pages/browseChannels";
-import Modal from "./createChannelModal";
+import CreateChannelModal from "./modal/createChannelModal";
 
 interface dashboardProp {
   token: string;
@@ -25,9 +25,10 @@ const Dashboard: FC<dashboardProp> = (props) => {
 
   return (
     <div className="dashboard">
-      {onModal && <Modal setOnModal={setOnModal} />}
+      {onModal && <CreateChannelModal setOnModal={setOnModal} />}
       <Sidebar setOnModal={setOnModal} />
       <Routes>
+        <Route path="" element={<Introduction />} />
         <Route path="channels" element={<BrowseChannels />} />
         <Route path="threads" element={<Threads />} />
         <Route
@@ -46,7 +47,6 @@ const Dashboard: FC<dashboardProp> = (props) => {
           path="mentions_and_reactions"
           element={<MentionsAndReactions />}
         />
-        <Route path="allchannels" element={<AllChannels />} />
       </Routes>
     </div>
   );

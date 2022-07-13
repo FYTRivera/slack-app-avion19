@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState, FC } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.svg";
-import { signUpAPI } from "../dataFetching";
-import "../styles/signup.css";
+import logo from "../../assets/logo.svg";
+import { signUpAPI } from "../../utils/dataFetching";
+import "../../styles/signup.css";
+import { HashLoader } from "react-spinners";
 
 const Signup: FC = () => {
   const [newUser, setNewUser] = useState({
@@ -21,6 +22,7 @@ const Signup: FC = () => {
   const errorRef = useRef(null);
   const myForm = useRef(null);
   const refs = [nameIn, emailIn, passIn, conPassIn];
+  const [isLoading, setIsLoading] = useState(false);
 
   //Hides error message when user types in the form
   useEffect(() => {
@@ -36,11 +38,13 @@ const Signup: FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setIsLoading(true);
+    setError("");
     error && errorRef.current.classList.remove("animation");
 
     try {
       const fetch = await signUpAPI(newUser);
+      setIsLoading(false);
 
       if (fetch.status === "error") {
         errorRef.current.classList.add("animation");
@@ -52,6 +56,8 @@ const Signup: FC = () => {
         setIsCreated(true);
       }
     } catch (error) {
+      setIsLoading(false);
+
       errorRef.current.classList.add("animation");
       setError("Sign up is currently under maintenance");
     }
@@ -112,17 +118,28 @@ const Signup: FC = () => {
             setNewUser({ ...newUser, password_confirmation: e.target.value })
           }
         />
-        <input className="submit" type="submit" value="Create Account" />
+        {/* <input className="submit" type="submit" value="Create Account" /> */}
+        <button className="submit" onClick={handleSubmit}>
+          <div>
+            {isLoading ? (
+              <HashLoader size={19} color="white" />
+            ) : (
+              "Create Account"
+            )}
+          </div>
+        </button>
       </form>
-      <div ref={errorRef} className="error">
+      <div ref={errorRef} className="errorSignUp">
         {error}
       </div>
       <div className="footer">
-        <h6>Already using Slack?</h6>
-        <Link to="/signin">Sign in to an existing account</Link>
+        <h4 className="already-slack">Already using Slack?</h4>
+        <Link to="/signin" className="link-signup">
+          Sign in to an existing account
+        </Link>
       </div>
     </div>
-  );
+  );  
 };
 
 export default Signup;

@@ -1,9 +1,9 @@
 import React, { useEffect, useState, FC } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Dashboard from "./components/dashboard/index";
-import Signin from "./components/signin";
-import Signup from "./components/signup";
-import PrivateRoutes from "./privateRoutes";
+import Signin from "./components/authentication/signin";
+import Signup from "./components/authentication/signup";
+import PrivateRoutes from "./utils/privateRoutes";
 
 export const Auth = React.createContext(null);
 

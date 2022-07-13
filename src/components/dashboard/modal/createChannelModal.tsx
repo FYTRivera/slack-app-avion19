@@ -1,7 +1,7 @@
 import { FC, FormEvent, useContext, useRef, useState } from "react";
-import { Auth } from "../../App";
-import { createChannel } from "../../dataFetching";
-import "../../styles/dashboard/createChannelModal.css";
+import { Auth } from "../../../App";
+import { createChannel } from "../../../utils/dataFetching";
+import "../../../styles/dashboard/createChannelModal.css";
 
 interface ModalProps {
   setOnModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,6 +11,7 @@ const Modal: FC<ModalProps> = ({ setOnModal }) => {
   const userData = useContext(Auth);
   const [error, setError] = useState("");
   const [newChannel, setNewChannel] = useState([]);
+  const errorDiv = useRef(null);
 
   const [createChannelInfo, setCreateChannelInfo] = useState({
     name: "",
@@ -20,21 +21,25 @@ const Modal: FC<ModalProps> = ({ setOnModal }) => {
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
+    errorDiv.current.classList.remove("animation");
 
     try {
       const fetch = await createChannel(userData, createChannelInfo);
 
       if (!fetch.errors) {
-        setNewChannel((prevData) => [...prevData, ...fetch.data.name]);
+        setNewChannel((prevData) => [...prevData, fetch.data]);
 
-        closeModal();
+        setTimeout(() => {
+          closeModal();
+        }, 0);
       } else {
+        errorDiv.current.classList.add("animation");
         setError(fetch.errors[0]);
       }
+      console.log(newChannel);  
     } catch (e) {
       console.error(e);
     }
-    console.log(newChannel);
   };
 
   const closeModal = () => {
@@ -88,7 +93,9 @@ const Modal: FC<ModalProps> = ({ setOnModal }) => {
               value="Create"
               className="create-button"
             ></input>
-            <div className="error-create">{error}</div>
+            <div className="error-create" ref={errorDiv}>
+              {error}
+            </div>
           </div>
         </form>
       </div>

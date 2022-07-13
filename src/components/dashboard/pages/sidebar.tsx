@@ -1,5 +1,6 @@
-import { useRef, useState, FC } from "react";
+import { useRef, useState, FC, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Auth } from "../../../App";
 import "../../../styles/dashboard/sidebar.css";
 
 interface SidebarProps {
@@ -9,6 +10,7 @@ interface SidebarProps {
 const Sidebar: FC<SidebarProps> = ({ setOnModal }) => {
   const channelList = useRef(null);
   const [chHeight, setChHeight] = useState("");
+  const userData = useContext(Auth);
 
   const onLogOut = () => {
     localStorage.setItem("isLoggedIn", JSON.stringify(false));
@@ -68,16 +70,16 @@ const Sidebar: FC<SidebarProps> = ({ setOnModal }) => {
           <NavLink to="channels" className="browse-channels">
             <i className="fa-solid fa-square-plus"></i>Browse channels
           </NavLink>
-          <NavLink to="test" className="new">
-            <i className="fa-solid fa-square-plus"></i>TEST
-          </NavLink>
         </div>
       </div>
       <div className="direct-message"></div>
 
-      <Link to="/signin" onClick={onLogOut} className="logout">
-        Log Out
-      </Link>
+      <div className="footer-logout">
+        <div className="user-email">{userData.uid}</div>
+        <Link to="/signin" onClick={onLogOut} className="logout">
+          Log Out
+        </Link>
+      </div>
     </div>
   );
 };

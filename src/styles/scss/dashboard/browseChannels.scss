@@ -52,8 +52,18 @@
   }
 
   .display-channels {
-    padding: 0rem 1rem 1rem 1rem;
+    padding: 0rem 1rem 3rem 1rem;
     overflow-y: scroll;
+    position: relative;
+
+    .load {
+      color: blue;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 20px;
+      text-align: center;
+    }
 
     &::-webkit-scrollbar {
       width: 9px;

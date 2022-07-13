@@ -27,7 +27,7 @@
 
     .google-signup,
     .facebook-signup {
-      padding: 0.8rem 4rem;
+      padding: 0.8rem 4.4rem;
       gap: 0.5rem;
       display: flex;
       align-items: center;
@@ -117,7 +117,7 @@
     }
 
     .submit {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       padding: 0.8rem;
       border-radius: 5px;
       background-image: linear-gradient(to right, #5e2c72, #745580, #401e4e);
@@ -129,6 +129,9 @@
       cursor: pointer;
       transition: background-position 0.3s;
       outline-color: #a6a4a7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:hover {
         background-position: 50%;
@@ -140,12 +143,12 @@
     }
   }
 
-  .error {
+  .errorSignUp {
     color: red;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1em;
+    margin: 1rem;
     font-size: 0.9rem;
   }
 
@@ -154,13 +157,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 0.5rem;
 
-    h6 {
+    .already-slack {
       color: gray;
       font-weight: 100;
+      font-size: 0.7rem;
     }
 
-    a {
+    .link-signup {
       text-decoration: none;
       font-size: 0.8rem;
       color: #577fcf;
