@@ -73,6 +73,7 @@ const DirectMessages: FC<messageProp> = (props) => {
       const fetch = await sendMessageAPI(directMessage);
 
       if (fetch.data) {
+        setDirectMessage({...directMessage, body: ""})
         setError("");
         isMessaged ? setIsMessaged(false) : setIsMessaged(true);
       } else if (!fetch.success) {
@@ -134,6 +135,7 @@ const DirectMessages: FC<messageProp> = (props) => {
             value={directMessage.receiver}
             type="number"
             placeholder="ID of Recipient"
+            className="contact-id-input"
             onChange={(e: any) =>
               setDirectMessage({ ...directMessage, receiver: e.target.value })
             }
@@ -143,35 +145,49 @@ const DirectMessages: FC<messageProp> = (props) => {
         </div>
         <div>
           <ul>
-            <p className="error">{error}</p>
             {receivedMessages.map((message, index) =>
               message.sender.id == directMessage.receiver ? (
+                <>
+                <h5 className="recipient-user">User #{directMessage.receiver}</h5>
                 <div className="received-message-div">
                   <li key={index} className="received-message">
                     {message.body}
                     <h6>received</h6>
                   </li>
                 </div>
+                <h6 className="received-date-and-time">{message.created_at}</h6>
+                </>
               ) : (
-                <div className="sent-message-div">
-                  <li key={index} className="sent-message">
-                    {message.body}
-                    <h6>sent</h6>
-                  </li>
-                </div>
+                <>
+                  <h5 className="sender-user">User #{signInData.id}</h5>
+                  <div className="sent-message-div">
+                    <li key={index} className="sent-message">
+                      {message.body}
+                      <h6>sent</h6>
+                    </li>
+                  </div>
+                  <h6 className="sent-date-and-time">{message.created_at}</h6>
+                </>
               )
             )}
           </ul>
         </div>
-        <div className="send-message-div">
-            <input
-              type="text"
-              placeholder="Message..."
-              onChange={(e: any) =>
-                setDirectMessage({ ...directMessage, body: e.target.value })
-              }
-            ></input>
-            <button onClick={handleMessageSend}>SEND</button>
+        <div className="bottom-div">
+          {error!=""?<div className="error">
+            <p >{error}</p>
+          </div>: <p >{error}</p>}
+          <div className="send-message-div">
+              <input
+                type="text"
+                placeholder="Message..."
+                className="message-box-input"
+                value={directMessage.body}
+                onChange={(e: any) =>
+                  setDirectMessage({ ...directMessage, body: e.target.value })
+                }
+              ></input>
+              <button className="send-button" onClick={handleMessageSend}>SEND</button>
+          </div>
         </div>
       </div>
     </>
