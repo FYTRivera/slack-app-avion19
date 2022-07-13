@@ -1,31 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
-<<<<<<< HEAD
-
-label{
-    color: lightgray;
-}
-
-body{
-    font-family: "Noto Sans", sans-serif;
-}
-
-ul{
-    padding-top: 20px;
-    padding-left:10px;
-    padding-right:10px;
-    padding-bottom: 50px;
-    margin:0;
-    /* margin-top: 20px;
-    margin-bottom: 50px; */
-    display: flex;
-    flex-direction: column;
-=======
 *,
 *::before,
 *::after {
   box-sizing: border-box;
->>>>>>> f6f8eb939d7673f03d8b8729d5fdd2ee90a7fa56
 }
 
 body {
@@ -46,68 +24,11 @@ body {
   }
 }
 
-<<<<<<< HEAD
-h5{
-    margin:0;
-}
-
-h6{
-    margin:0;
-}
-
-.sent-message{
-    text-align:right;
-    background-color: #c591c5;
-    border-radius: 100px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 5px; 
-    padding-top: 5px;
-    margin: 5px;
-}
-
-.received-message{
-    text-align:left;
-    background-color: #a782a7;
-    border-radius: 100px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 5px; 
-    padding-top: 5px;
-    margin: 5px;
-}
-
-.error {
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    color: rgb(243, 70, 70);
-    font-size: 0.9rem;
-    padding:0;
-    border-radius: 100px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 5px; 
-    padding-top: 5px;
-    margin-bottom: 5px;
-    
-  }
-
-.send-message-div{
-    width: 100%;
-    /* position: fixed;
-    bottom:0; */
-    height: 50px;
-    background-color: lightgray;
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-=======
 ul {
-  padding-top: 0px;
+  padding-top: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  padding-bottom: 0px;
+  padding-bottom: 50px;
   margin: 0;
   margin-bottom: 50px;
   display: flex;
@@ -121,6 +42,11 @@ li {
 
 h2 {
   margin: 0;
+  color: white;
+}
+
+h5{
+  margin:0;
 }
 
 h6 {
@@ -128,18 +54,24 @@ h6 {
 }
 
 .sent-message {
-  text-align: left;
+  text-align:right;
   background-color: #c591c5;
-  border-radius: 10px;
-  padding: 5px;
+  border-radius: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 5px; 
+  padding-top: 5px;
   margin: 5px;
 }
 
 .received-message {
-  text-align: right;
+  text-align:left;
   background-color: #a782a7;
-  border-radius: 10px;
-  padding: 5px;
+  border-radius: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 5px; 
+  padding-top: 5px;
   margin: 5px;
 }
 
@@ -149,36 +81,47 @@ h6 {
   justify-content: center;
   color: rgb(243, 70, 70);
   font-size: 0.9rem;
->>>>>>> f6f8eb939d7673f03d8b8729d5fdd2ee90a7fa56
+  border-radius: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 5px; 
+  padding-top: 5px;
+  margin-bottom: 5px;
 }
 
 .send-message-div {
   width: 100%;
-  position: fixed;
-  bottom: 0;
-  height: 50px;
-  background-color: lightgray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    /* position: fixed;
+    bottom:0; */
+    height: 50px;
+    background-color: lightgray;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
 }
 
-<<<<<<< HEAD
-.received-message-div{
-    align-self:flex-start;
+.messages-div {
+  width: 100%;
 }
 
-.sent-message-div{
-    align-self:flex-end;
+.received-message-div {
+  align-self: flex-start;
 }
 
-.top-message-div{
-    background-color:#6d306d;
-    position: sticky;
-    top:0;
-    padding: 10px;
-    padding-left: 20px;
-    color: white;
+.sent-message-div {
+  align-self: flex-end;
+}
+
+.top-message-div {
+  background-color: #6d306d;
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  padding-left: 20px;
+}
+
+label{
+  color: lightgray;
 }
 
 .contact-id-input{
@@ -253,26 +196,4 @@ h6 {
       /* margin-top: 0.5rem; */
       margin-left: 0.5rem;
   }
-=======
-.messages-div {
-  width: 100%;
-}
-
-.received-message-div {
-  align-self: flex-end;
-}
-
-.sent-message-div {
-  align-self: flex-start;
-}
-
-.top-message-div {
-  background-color: #6d306d;
-  position: sticky;
-  top: 0;
-  padding: 10px;
-  padding-left: 20px;
-}
-
->>>>>>> f6f8eb939d7673f03d8b8729d5fdd2ee90a7fa56
 /*# sourceMappingURL=message.css.map */
