@@ -120,8 +120,13 @@ label {
   color: lightgray;
 }
 
+<<<<<<< HEAD
 .contact-id-input {
   width: 50px;
+=======
+.contact-id-input{
+  
+>>>>>>> 78a7902a000b518d156fd9d804364192add0beb7
   height: 25px;
   font-size: 12px;
   border-radius: 5px;

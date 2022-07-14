@@ -46,6 +46,16 @@ const DirectMessages: FC<messageProp> = (props) => {
 
   const [error, setError] = useState("");
 
+  const [users, setUsers] = useState([])
+
+  const [filteredArray, setFilteredArray] = useState([{uid:"", id:""}])
+
+  const [recipientUID, setRecipientUID] = useState("")
+
+  const selectBox = useRef(null)
+
+  const [selectedUser, setSelectedUser] = useState(0)
+  
   const sendMessageAPI = async (e: any) => {
     return (
       await fetch("http://206.189.91.54/api/v1/messages", {
@@ -124,25 +134,100 @@ const DirectMessages: FC<messageProp> = (props) => {
   useEffect(() => {
     handleMessageReceive();
   }, [directMessage.receiver, isMessaged]);
-  /////////////////////////////////////////RECEIVED MESSAGES//////////////////////////////////////////////
+  
 
+  setTimeout(handleMessageReceive,1000);
+  /////////////////////////////////////////RECEIVED MESSAGES//////////////////////////////////////////////
+  /////////////////////////////////////////GET USERS/////////////////////////////////////////////////////
+  const getUsers = async () => {
+    return (
+      await fetch("http://206.189.91.54/api/v1/users", {
+        method: "GET",
+        headers: {
+          "access-token": token,
+          client: client,
+          expiry: expiry,
+          uid: uid,
+        },
+      })
+    ).json();
+  };
+
+  async function handleGetUsers() {
+    try {
+      const fetch = await getUsers();
+
+      if (fetch.data) {
+        console.log(fetch.data);
+        setUsers(fetch.data);
+        setError("");
+        setFilteredArray(users.filter((user)=>user.uid.includes(recipientUID)));
+        console.log(filteredArray,'filtered array')
+      } else if (!fetch.success) {
+        setReceivedMessages([]);
+        setError(fetch.errors);
+        setFilteredArray([])
+      }
+    } catch {}
+  }
+  // useEffect(()=>{handleGetUsers()},[users]);
+  
+  useEffect(() => {
+    handleGetUsers();
+  }, [recipientUID]);
+
+  function handleSelectChange(){
+    if(selectBox.current!==undefined){
+      console.log(selectBox.current.options[selectBox.current.options.selectedIndex].innerHTML)
+      console.log(filteredArray[(selectBox.current.options.selectedIndex - 1)].id)
+      setSelectedUser(Number(filteredArray[(selectBox.current.options.selectedIndex - 1)].id))
+      setDirectMessage({ ...directMessage, receiver: Number(filteredArray[(selectBox.current.options.selectedIndex - 1)].id) })
+    }
+  }
+  ////////////////////////////////////////GET USERS///////////////////////////////////////////////////////
+  
   return (
     <>
       <div className="messages-div">
         <div className="top-message-div">
-          <label>Contact ID#: </label>
-          <input
+          <label>Search: </label>
+          {/* <input
             value={directMessage.receiver}
             type="number"
             placeholder="ID of Recipient"
             className="contact-id-input"
+            // onChange={(e: any) =>
+            //   setDirectMessage({ ...directMessage, receiver: e.target.value })
+            // }
+          ></input> */}
+          <input
+            value={recipientUID}
+            type="text"
+            placeholder="UID of Recipient"
+            className="contact-id-input"
             onChange={(e: any) =>
-              setDirectMessage({ ...directMessage, receiver: e.target.value })
+              setRecipientUID(e.target.value)
             }
           ></input>
-          <h2>User #{directMessage.receiver}</h2>
+          {/* <button onClick={handleGetUsers}>get users</button> */}
+          
+    {/* Get Users */}
+                  
+          <div>
+            <label>UIDs: </label>
+            <select ref={selectBox} onChange={handleSelectChange}>
+              <option> Click here to see users! </option>
+            {recipientUID!==""?filteredArray.map(user=>(<><option>{user.uid} | {user.id}</option></>)):<p>nothing</p>}
+            </select>
+          </div>
+
+    {/* Get Users */}
+
+          {selectedUser!==0?<h2>User #{selectedUser}</h2>:<h2>Select a User</h2>}
+          <h2>User UID: {selectedUser}</h2>
           {/* <button onClick={handleMessageReceive}>REFRESH</button> */}
         </div>
+
         <div>
           <ul>
             {receivedMessages.map((message, index) =>
@@ -172,10 +257,11 @@ const DirectMessages: FC<messageProp> = (props) => {
             )}
           </ul>
         </div>
+
         <div className="bottom-div">
-          {error!=""?<div className="error">
+          {error!==""?<div className="error">
             <p >{error}</p>
-          </div>: <p >{error}</p>}
+          </div>: <p>{error}</p>}
           <div className="send-message-div">
               <input
                 type="text"
