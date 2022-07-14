@@ -6,6 +6,17 @@
   width: 30vmin;
   overflow: hidden;
   position: relative;
+  resize: horizontal;
+}
+.sidebar::after {
+  content: "";
+  background-color: #461e46;
+  display: flex;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 4px;
+  cursor: col-resize;
 }
 .sidebar .title {
   color: white;
