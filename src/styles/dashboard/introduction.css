@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.animation {
+  animation: error 0.04s ease-in-out 0s 6 alternate forwards;
+}
+@keyframes error {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(5px);
+  }
+}
+
+.dashboard-intro {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: rgb(250, 250, 250);
+}
+.dashboard-intro .introduction {
+  border-bottom: 1px solid rgb(221, 221, 221);
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+.dashboard-intro .introduction-description {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #cdf8e6;
+}
+.dashboard-intro .introduction-description h1 {
+  max-width: 40rem;
+}
+.dashboard-intro .introduction-description h3 {
+  color: rgb(150, 150, 150);
+}
+.dashboard-intro .introduction-description img {
+  max-width: 25rem;
+}
+.dashboard-intro .intro-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  gap: 2rem;
+}
+.dashboard-intro .intro-buttons h2 {
+  font-size: 1.5rem;
+  color: black;
+}
+.dashboard-intro .intro-buttons .buttons {
+  display: flex;
+  gap: 1rem;
+}
+.dashboard-intro .intro-buttons .buttons .create-channel,
+.dashboard-intro .intro-buttons .buttons .start-message {
+  padding: 1rem 0;
+  border-radius: 5px;
+  outline: none;
+  font-weight: 500;
+  border: 1px solid rgb(221, 221, 221);
+  background: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  user-select: none;
+  width: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.dashboard-intro .intro-buttons .buttons .create-channel .fa-solid,
+.dashboard-intro .intro-buttons .buttons .start-message .fa-solid {
+  margin: 0rem 1rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: rgb(219, 219, 219);
+  color: gray;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+.dashboard-intro .intro-buttons .buttons .create-channel:hover,
+.dashboard-intro .intro-buttons .buttons .start-message:hover {
+  background-color: rgb(245, 245, 245);
+  box-shadow: 0px 0px 5px 2px rgba(150, 150, 150, 0.2);
+}
+.dashboard-intro .intro-buttons .buttons .create-channel:active,
+.dashboard-intro .intro-buttons .buttons .start-message:active {
+  border: 1px solid rgb(136, 136, 136);
+}
+
+/*# sourceMappingURL=introduction.css.map */

@@ -78,7 +78,7 @@ const Signup: FC = () => {
           Continue with Facebook
         </button>
       </div>
-      <h5>OR</h5>
+      <h5 className="or">OR</h5>
       <form action="" onSubmit={handleSubmit} ref={myForm}>
         <input
           required

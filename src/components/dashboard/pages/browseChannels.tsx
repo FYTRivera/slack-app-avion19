@@ -1,20 +1,49 @@
-import { useContext, useEffect, useState, FC } from "react";
+import { useContext, useEffect, useState, FC, useRef } from "react";
 import { getChannelDetails, getChannels } from "../../../utils/dataFetching";
 import "../../../styles/dashboard/browseChannels.css";
 import { Auth } from "../../../App";
 import { PulseLoader } from "react-spinners";
-// import Display from "../displayChannels";
+import styled from "styled-components";
 
-const BrowseChannels: FC = () => {
+interface BrowseChannelsProps {
+  selectedChannel: any[];
+  setSelectedChannel: React.Dispatch<React.SetStateAction<any[]>>;
+}
+
+const BrowseChannels: FC<BrowseChannelsProps> = (props) => {
+  const { selectedChannel, setSelectedChannel } = props;
   const userData = useContext(Auth);
   const [channels, setChannels] = useState([]);
-  const [members, setMembers] = useState("");
-  const [total, setTotal] = useState(0);
-  const [id, setId] = useState([]);
+  const [total, setTotal] = useState<number>(0);
+  const [ids, setIds] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const currentButton = useRef(null);
+  const [isClicked, setIsClicked] = useState();
 
   useEffect(() => {
     displayChannel();
+  }, [setChannels, selectedChannel]);
+
+  const joinHandler = (e: any, id: number, name: string) => {
+    e.preventDefault();
+
+    setSelectedChannel((prevChannel: any) => [
+      ...prevChannel,
+      { name: name, id: id },
+    ]);
+
+    currentButton.current = e.target;
+    setIsClicked(e.target.id);
+    currentButton.current.style.opacity = "0";
+  };
+
+  useEffect(() => {
+    localStorage.setItem("newChannels", JSON.stringify(selectedChannel));
+  }, [selectedChannel]);
+
+  useEffect(() => {
+    const newChannell = JSON.parse(localStorage.getItem("newChannels"));
+    newChannell && setSelectedChannel(newChannell);
   }, []);
 
   const displayChannel = async () => {
@@ -41,19 +70,36 @@ const BrowseChannels: FC = () => {
   // };
 
   const Display = (): any => {
-    const [test, setTest] = useState();
     if (channels) {
-      return channels.map((user, index) => {
-        const test = getChannelDetails(userData, user.id);
-        // console.log(test);
+      return channels.map((channel, index) => {
+        // const testing = async () => {
+        //   const test = await getChannelDetails(userData, channel.id);
+
+        // };
+
+        // testing();
+
+        // setIds(channel.id);
 
         return (
-          <div key={index} className="channel">
-            <div className="channel-name">
-              <i className="fa-solid fa-unlock-keyhole"></i>
-              {user.name}
+          <div key={channel.id} className="channel">
+            <div>
+              <div className="channel-name">
+                <i className="fa-solid fa-hashtag"></i>
+                {channel.name}
+              </div>
+              <div className="channel-members">
+                1 members • Channel ID: {channel.id} • Created:{" "}
+                {channel.created_at.substring(0, 10)}
+              </div>
             </div>
-            <div className="channel-members">2 members</div>
+            <button
+              id={channel.id}
+              className="channel-join"
+              onClick={(e: any) => joinHandler(e, channel.id, channel.name)}
+            >
+              Join
+            </button>
           </div>
         );
       });

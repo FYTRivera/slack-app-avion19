@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, FC } from "react";
+import React, { useEffect, useRef, useState, FC, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { signInAPI } from "../../utils/dataFetching";
@@ -38,7 +38,7 @@ const Signin: FC<signInProp> = (props) => {
     errorRef.current.classList.remove("animation");
   }, [signUser]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
@@ -56,9 +56,7 @@ const Signin: FC<signInProp> = (props) => {
         setClient(fetch.headers.get("client"));
         setExpiry(fetch.headers.get("expiry"));
         setUid(fetch.headers.get("uid"));
-        console.log(response.data, "response data"); //logs response.data
         setSignInData(response.data);
-        console.log(signInData, "sign in data");
       } else if (!response.success) {
         setIsLoading(false);
         errorRef.current.classList.add("animation");

@@ -22,15 +22,38 @@ interface dashboardProp {
 const Dashboard: FC<dashboardProp> = (props) => {
   const { token, client, expiry, uid, signInData } = props;
   const [onModal, setOnModal] = useState(false);
+  // const [startMessage, startMessage] = useState(false);
+  const [selectedChannel, setSelectedChannel] = useState<any[]>([]);
 
   return (
     <div className="dashboard">
-      {onModal && <CreateChannelModal setOnModal={setOnModal} />}
-      <Sidebar setOnModal={setOnModal} />
+      {onModal && (
+        <CreateChannelModal
+          setOnModal={setOnModal}
+          selectedChannel={selectedChannel}
+          setSelectedChannel={setSelectedChannel}
+        />
+      )}
+      <Sidebar
+        setOnModal={setOnModal}
+        selectedChannel={selectedChannel}
+        setSelectedChannel={setSelectedChannel}
+      />
       <Routes>
-        <Route path="" element={<Introduction />} />
-        <Route path="channels" element={<BrowseChannels />} />
-        <Route path="threads" element={<Threads />} />
+        <Route path="" element={<Introduction setOnModal={setOnModal} />} />
+        <Route
+          path="channels"
+          element={
+            <BrowseChannels
+              selectedChannel={selectedChannel}
+              setSelectedChannel={setSelectedChannel}
+            />
+          }
+        />
+        <Route
+          path="threads"
+          element={<Introduction setOnModal={setOnModal} />}
+        />
         <Route
           path="direct_messages"
           element={
@@ -45,7 +68,7 @@ const Dashboard: FC<dashboardProp> = (props) => {
         />
         <Route
           path="mentions_and_reactions"
-          element={<MentionsAndReactions />}
+          element={<Introduction setOnModal={setOnModal} />}
         />
       </Routes>
     </div>

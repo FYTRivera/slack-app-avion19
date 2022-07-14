@@ -92,6 +92,8 @@ body {
   cursor: pointer;
   padding: 1rem;
   border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  display: flex;
+  justify-content: space-between;
 }
 .all-channels .display-channels .channel .channel-name {
   font-size: 1rem;
@@ -106,8 +108,31 @@ body {
   font-size: 0.7rem;
   color: rgba(128, 128, 128, 0.8);
 }
+.all-channels .display-channels .channel .channel-join {
+  display: none;
+  align-items: center;
+  justify-self: end;
+  padding: 0rem 1.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  color: white;
+  background-color: #238a5f;
+  transition: background-color 0.2s;
+}
+.all-channels .display-channels .channel .channel-join:hover {
+  background-color: #299c6c;
+}
+.all-channels .display-channels .channel .channel-join:active {
+  background-color: #1f7752;
+}
 .all-channels .display-channels .channel:hover {
   background-color: rgba(128, 128, 128, 0.1);
+}
+.all-channels .display-channels .channel:hover .channel-join {
+  display: flex;
 }
 .all-channels .display-channels .no-channel {
   display: flex;
@@ -115,6 +140,9 @@ body {
   justify-content: center;
   color: rgba(128, 128, 128, 0.8);
   padding: 1rem;
+}
+.all-channels .display-channels .selected {
+  display: none;
 }
 
 /*# sourceMappingURL=browseChannels.css.map */

@@ -2,16 +2,19 @@ import { FC, FormEvent, useContext, useRef, useState } from "react";
 import { Auth } from "../../../App";
 import { createChannel } from "../../../utils/dataFetching";
 import "../../../styles/dashboard/createChannelModal.css";
+import { HashLoader } from "react-spinners";
 
 interface ModalProps {
   setOnModal: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedChannel: any[];
+  setSelectedChannel: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
-const Modal: FC<ModalProps> = ({ setOnModal }) => {
+const Modal: FC<ModalProps> = ({ setOnModal, setSelectedChannel }) => {
   const userData = useContext(Auth);
   const [error, setError] = useState("");
-  const [newChannel, setNewChannel] = useState([]);
   const errorDiv = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [createChannelInfo, setCreateChannelInfo] = useState({
     name: "",
@@ -21,13 +24,19 @@ const Modal: FC<ModalProps> = ({ setOnModal }) => {
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError("");
     errorDiv.current.classList.remove("animation");
 
     try {
       const fetch = await createChannel(userData, createChannelInfo);
+      setIsLoading(false);
 
       if (!fetch.errors) {
-        setNewChannel((prevData) => [...prevData, fetch.data]);
+        setSelectedChannel((prevChannel: any) => [
+          ...prevChannel,
+          { name: fetch.data.name, id: "" },
+        ]);
 
         setTimeout(() => {
           closeModal();
@@ -36,7 +45,6 @@ const Modal: FC<ModalProps> = ({ setOnModal }) => {
         errorDiv.current.classList.add("animation");
         setError(fetch.errors[0]);
       }
-      console.log(newChannel);  
     } catch (e) {
       console.error(e);
     }
@@ -49,7 +57,7 @@ const Modal: FC<ModalProps> = ({ setOnModal }) => {
   return (
     <div className="createChannel">
       <div className="createModal">
-        <form onSubmit={submitHandler} action="">
+        <form>
           <div className="title-with-button">
             <h1 className="modal-title">Create a channel</h1>
             <button className="modal-button">
@@ -88,11 +96,11 @@ const Modal: FC<ModalProps> = ({ setOnModal }) => {
             ></input>
           </div>
           <div className="create-button-error">
-            <input
-              type="submit"
-              value="Create"
-              className="create-button"
-            ></input>
+            <button onClick={submitHandler} className="create-button">
+              <div className="create-button-div">
+                {isLoading ? <HashLoader size={18} color="white" /> : "Create"}
+              </div>
+            </button>
             <div className="error-create" ref={errorDiv}>
               {error}
             </div>

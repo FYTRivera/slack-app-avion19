@@ -127,19 +127,25 @@
 
       .create-button {
         display: flex;
-        align-self: flex-end;
-        justify-self: flex-end;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         padding: 0.5rem 1rem;
         font-family: "Noto Sans", sans-serif;
-        background: #0f6b0f;
+        background-color: #238a5f;
         color: white;
         cursor: pointer;
         border-radius: 4px;
         outline: none;
         border: none;
+        width: 5rem;
 
         &:hover {
-          background: #127712;
+          background-color: #299c6c;
+        }
+
+        &:active {
+          background-color: #1f7752;
         }
       }
 

@@ -45,32 +45,28 @@ h2 {
   color: white;
 }
 
-h5{
-  margin:0;
-}
-
 h6 {
   margin: 0;
 }
 
 .sent-message {
-  text-align:right;
+  text-align: right;
   background-color: #c591c5;
   border-radius: 100px;
   padding-left: 15px;
   padding-right: 15px;
-  padding-bottom: 5px; 
+  padding-bottom: 5px;
   padding-top: 5px;
   margin: 5px;
 }
 
 .received-message {
-  text-align:left;
+  text-align: left;
   background-color: #a782a7;
   border-radius: 100px;
   padding-left: 15px;
   padding-right: 15px;
-  padding-bottom: 5px; 
+  padding-bottom: 5px;
   padding-top: 5px;
   margin: 5px;
 }
@@ -84,20 +80,20 @@ h6 {
   border-radius: 100px;
   padding-left: 15px;
   padding-right: 15px;
-  padding-bottom: 5px; 
+  padding-bottom: 5px;
   padding-top: 5px;
   margin-bottom: 5px;
 }
 
 .send-message-div {
-  width: 100%;
-    /* position: fixed;
-    bottom:0; */
-    height: 50px;
-    background-color: lightgray;
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
+  width: 80vw;
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .messages-div {
@@ -120,11 +116,11 @@ h6 {
   padding-left: 20px;
 }
 
-label{
+label {
   color: lightgray;
 }
 
-.contact-id-input{
+.contact-id-input {
   width: 50px;
   height: 25px;
   font-size: 12px;
@@ -133,67 +129,68 @@ label{
   outline: none;
 }
 
-.message-box-input{
-    position: relative;
-    width: 80%;
-    padding-left: 10px;
-    margin-left: 15px;
-    height: 75%;
-    font-size: 12px;
-    border-radius: 5px;
-    border: 1px solid gray;
-    outline: none;
-  }
+.message-box-input {
+  position: relative;
+  width: 80%;
+  padding-left: 10px;
+  margin-left: 15px;
+  height: 75%;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  outline: none;
+}
 
-  .received-date-and-time{
-    font-size: 10px;
-    color: grey;
-    margin-left: 10px;
-    margin-bottom: 10px;
-  }
+.received-date-and-time {
+  font-size: 10px;
+  color: grey;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
 
-  .sent-date-and-time{
-    font-size: 10px;
-    color: grey;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    align-self: flex-end;
-  }
+.sent-date-and-time {
+  font-size: 10px;
+  color: grey;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  align-self: flex-end;
+}
 
-  .recipient-user{
-    margin-left: 10px;
-  }
+.recipient-user {
+  margin-left: 10px;
+}
 
-  .sender-user{
-    align-self: flex-end;
-    margin-top: 10px;
-    margin-right: 10px;
-  }
+.sender-user {
+  align-self: flex-end;
+  margin-top: 10px;
+  margin-right: 10px;
+}
 
-  .bottom-div{
-    position: fixed;
-    bottom:0;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .send-button{
-      /* padding: 0.8rem; */
-      height: 80%;
-      border-radius: 5px;
-      background-image: linear-gradient(to right, #0c610c, #497749, #084608);
-      background-position: 0%;
-      background-size: 600%;
-      color: white;
-      border: none;
-      font-weight: 1000;
-      cursor: pointer;
-      transition: background-position 0.3s;
-      outline-color: #abb4ab;
-      /* margin-top: 0.5rem; */
-      margin-left: 0.5rem;
-  }
+.bottom-div {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.send-button {
+  padding: 0.8rem;
+  height: 80%;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #0c610c, #497749, #084608);
+  background-position: 0%;
+  background-size: 600%;
+  color: white;
+  border: none;
+  font-weight: 1000;
+  cursor: pointer;
+  transition: background-position 0.3s;
+  outline-color: #abb4ab;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+
 /*# sourceMappingURL=message.css.map */

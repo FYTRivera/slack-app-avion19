@@ -1,25 +1,32 @@
-import { useRef, useState, FC, useContext } from "react";
+import { useRef, useState, FC, useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Auth } from "../../../App";
 import "../../../styles/dashboard/sidebar.css";
 
 interface SidebarProps {
   setOnModal: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedChannel: any[];
+  setSelectedChannel: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
-const Sidebar: FC<SidebarProps> = ({ setOnModal }) => {
+const Sidebar: FC<SidebarProps> = ({
+  setOnModal,
+  selectedChannel,
+  setSelectedChannel,
+}) => {
   const channelList = useRef(null);
   const [chHeight, setChHeight] = useState("");
   const userData = useContext(Auth);
 
   const onLogOut = () => {
+    localStorage.clear();
     localStorage.setItem("isLoggedIn", JSON.stringify(false));
     window.location.reload();
   };
 
   const channelHandler = () => {
     if (channelList.current.clientHeight === 0) {
-      setChHeight("100px");
+      setChHeight("auto");
       channelList.current.style.height = chHeight;
     } else {
       setChHeight("0px");
@@ -29,6 +36,29 @@ const Sidebar: FC<SidebarProps> = ({ setOnModal }) => {
 
   const openModal = () => {
     setOnModal(true);
+  };
+
+  useEffect(() => {
+    setInterval(() => {
+      // console.log(selectedChannel);
+    }, 200);
+  }, []);
+
+  const AddChannel = () => {
+    const newChannell = JSON.parse(localStorage.getItem("newChannels"));
+
+    if (newChannell) {
+      return newChannell.map((channel: any) => {
+        const to = `channel/:${channel.id}`;
+
+        return (
+          <NavLink to={to} className="browse-channels" key={channel.id}>
+            <i className="fa-solid fa-hashtag"></i>
+            {channel.name}
+          </NavLink>
+        );
+      });
+    }
   };
 
   return (
@@ -66,10 +96,12 @@ const Sidebar: FC<SidebarProps> = ({ setOnModal }) => {
             <i className="fa-solid fa-plus"></i>
           </span>
         </label>
+
         <div className="channel-list" ref={channelList}>
           <NavLink to="channels" className="browse-channels">
             <i className="fa-solid fa-square-plus"></i>Browse channels
           </NavLink>
+          <AddChannel />
         </div>
       </div>
       <div className="direct-message"></div>

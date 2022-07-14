@@ -6,8 +6,6 @@
   width: 30vmin;
   overflow: hidden;
   position: relative;
-  position: sticky;
-  top: 0;
 }
 .sidebar .title {
   color: white;
@@ -77,6 +75,7 @@
   color: rgb(180, 180, 180);
   padding: 1rem 0;
   user-select: none;
+  height: auto;
 }
 .sidebar .channels .label-channel {
   cursor: pointer;
@@ -129,7 +128,7 @@
 }
 .sidebar .channels .channel-list {
   display: block;
-  height: 100px;
+  height: auto;
   overflow: hidden;
   transition: height 0.2s;
 }
@@ -147,22 +146,6 @@
   font-size: 1rem;
 }
 .sidebar .channels .channel-list .browse-channels:hover:not(.active) {
-  background-color: rgb(52, 22, 52);
-}
-.sidebar .channels .channel-list .new {
-  font-size: 0.8rem;
-  padding: 0.3rem 1.1rem;
-  cursor: pointer;
-  display: flex;
-  gap: 0.7rem;
-  align-items: center;
-  text-decoration: none;
-  color: rgb(180, 180, 180);
-}
-.sidebar .channels .channel-list .new .fa-square-plus {
-  font-size: 1rem;
-}
-.sidebar .channels .channel-list .new:hover:not(.active) {
   background-color: rgb(52, 22, 52);
 }
 .sidebar .footer-logout {

@@ -81,22 +81,23 @@ body {
 .signup .buttons .facebook-signup {
   color: #4267b2;
 }
-.signup h5 {
+.signup .or {
   display: flex;
   position: relative;
+  margin: 1rem;
 }
-.signup h5::before, .signup h5::after {
+.signup .or::before, .signup .or::after {
   content: "";
   display: flex;
   height: 1px;
   width: 8rem;
   background: rgb(200, 200, 200);
 }
-.signup h5::before {
+.signup .or::before {
   position: absolute;
   left: -9rem;
 }
-.signup h5::after {
+.signup .or::after {
   position: absolute;
   right: -9rem;
 }
