@@ -85,12 +85,14 @@
     }
   }
 
+  .direct-messages,
   .channels {
     color: rgb(180, 180, 180);
     padding: 1rem 0;
     user-select: none;
     height: auto;
 
+    .label-direct,
     .label-channel {
       cursor: pointer;
       display: flex;
@@ -103,6 +105,10 @@
         opacity: 1;
       }
 
+      &:hover .add-direct {
+        opacity: 1;
+      }
+
       .fa-caret-down {
         display: flex;
         align-items: center;
@@ -112,6 +118,7 @@
         transition: transform 0.2s;
       }
 
+      .direct,
       .channel {
         display: flex;
         align-items: center;
@@ -119,6 +126,7 @@
         justify-self: center;
       }
 
+      .add-direct,
       .add-channel {
         position: absolute;
         right: 10px;
@@ -149,12 +157,14 @@
       }
     }
 
+    .direct-list,
     .channel-list {
       display: block;
       height: auto;
       overflow: hidden;
       transition: height 0.2s;
 
+      .browse-directs,
       .browse-channels {
         font-size: clamp(0.8rem, 0.8rem, 1rem);
         padding: 0.3rem 1.1rem;

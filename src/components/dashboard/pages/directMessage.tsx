@@ -1,7 +1,12 @@
 import "../../../styles/dashboard/message.css";
-import { useState, useEffect, useRef, FC } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef, FC, useContext } from "react";
 import "../../../styles/dashboard/message.css";
+import { Auth } from "../../../App";
+import {
+  getUsers,
+  receiveMessageAPI,
+  sendMessageAPI,
+} from "../../../utils/dataFetching";
 
 //////ACCOUNT DETAILS//////
 
@@ -20,17 +25,16 @@ import "../../../styles/dashboard/message.css";
 //////ACCOUNT DETAILS//////
 
 interface messageProp {
-  token: string;
-  client: string;
-  expiry: string;
-  uid: string;
   signInData: {
     id?: number;
   };
 }
 
 const DirectMessages: FC<messageProp> = (props) => {
-  const { token, client, expiry, uid, signInData } = props;
+  const { signInData } = props;
+  const userData = useContext(Auth);
+
+  console.log(userData);
 
   const [directMessage, setDirectMessage] = useState({
     receiver: window.localStorage.getItem("lastAccount") || 2243,
@@ -56,31 +60,10 @@ const DirectMessages: FC<messageProp> = (props) => {
 
   const [selectedUser, setSelectedUser] = useState(0);
 
-  const sendMessageAPI = async (e: any) => {
-    return (
-      await fetch("http://206.189.91.54/api/v1/messages", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "access-token": token,
-          client: client,
-          expiry: expiry,
-          uid: uid,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          receiver_id: directMessage.receiver,
-          receiver_class: directMessage.receiver_class,
-          body: directMessage.body,
-        }),
-      })
-    ).json();
-  };
-
   async function handleMessageSend(e: any) {
     e.preventDefault();
     try {
-      const fetch = await sendMessageAPI(directMessage);
+      const fetch = await sendMessageAPI(userData, directMessage);
 
       if (fetch.data) {
         setDirectMessage({ ...directMessage, body: "" });
@@ -93,33 +76,10 @@ const DirectMessages: FC<messageProp> = (props) => {
   }
 
   //////////////////////////////////////////////RECEIVED MESSAGES////////////////////////////////////////////////
-  const receiveMessageAPI = async (e: any) => {
-    return (
-      await fetch(
-        `http://206.189.91.54/api/v1/messages?receiver_id=${directMessage.receiver}&receiver_class=User`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "access-token": token,
-            client: client,
-            expiry: expiry,
-            uid: uid,
-            "Content-Type": "application/json",
-          },
-          // body: JSON.stringify({
-          //   receiver_id: directMessage.receiver,
-          //   receiver_class: directMessage.receiver_class,
-          //   body: directMessage.body
-          // }),
-        }
-      )
-    ).json();
-  };
 
   async function handleMessageReceive() {
     try {
-      const fetch = await receiveMessageAPI(directMessage);
+      const fetch = await receiveMessageAPI(userData, directMessage);
 
       if (fetch.data) {
         setReceivedMessages(fetch.data);
@@ -128,33 +88,22 @@ const DirectMessages: FC<messageProp> = (props) => {
         setReceivedMessages([]);
         setError(fetch.errors);
       }
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   useEffect(() => {
     handleMessageReceive();
   }, [directMessage.receiver, isMessaged]);
 
-  // setTimeout(handleMessageReceive, 1000);
+  setTimeout(handleMessageReceive, 1000);
   /////////////////////////////////////////RECEIVED MESSAGES//////////////////////////////////////////////
   /////////////////////////////////////////GET USERS/////////////////////////////////////////////////////
-  const getUsers = async () => {
-    return (
-      await fetch("http://206.189.91.54/api/v1/users", {
-        method: "GET",
-        headers: {
-          "access-token": token,
-          client: client,
-          expiry: expiry,
-          uid: uid,
-        },
-      })
-    ).json();
-  };
 
   async function handleGetUsers() {
     try {
-      const fetch = await getUsers();
+      const fetch = await getUsers(userData);
 
       if (fetch.data) {
         console.log(fetch.data);
@@ -169,7 +118,9 @@ const DirectMessages: FC<messageProp> = (props) => {
         setError(fetch.errors);
         setFilteredArray([]);
       }
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
   }
   // useEffect(()=>{handleGetUsers()},[users]);
 
@@ -279,7 +230,6 @@ const DirectMessages: FC<messageProp> = (props) => {
         )}
         <div className="send-message-div">
           <textarea
-            // type="text-area"
             placeholder="Message"
             className="message-box-input"
             value={directMessage.body}

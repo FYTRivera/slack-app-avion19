@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.animation {
+  animation: error 0.04s ease-in-out 0s 6 alternate forwards;
+}
+@keyframes error {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(5px);
+  }
+}
+
+.direct-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.4);
+  flex-direction: column;
+}
+.direct-container .direct-message {
+  border-radius: 10px;
+  width: 30rem;
+  height: 27rem;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0px 0px 50px 30px rgba(109, 109, 109, 0.8);
+  overflow: hidden;
+  position: relative;
+}
+.direct-container .direct-message .direct-button-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  outline: none;
+  border: none;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+.direct-container .direct-message .direct-button-close .fa-xmark {
+  font-size: 1.3rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.5rem 0.4rem 0.5rem;
+  cursor: pointer;
+  color: gray;
+  transition: 0.3s;
+}
+.direct-container .direct-message .direct-button-close .fa-xmark:hover {
+  color: white;
+  background: rgba(105, 105, 105, 0.2);
+}
+.direct-container .direct-message .direct-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40%;
+  padding: 3rem;
+  overflow: hidden;
+  background-color: rgb(201, 241, 239);
+}
+.direct-container .direct-message .direct-title {
+  padding: 1.5rem;
+  font-size: 1.3rem;
+  margin: 0;
+  color: rgb(31, 31, 31);
+}
+.direct-container .direct-message .direct-description {
+  padding: 0rem 1.5rem;
+  font-size: 0.8rem;
+  margin: 0;
+  font-weight: 100;
+  color: gray;
+}
+.direct-container .direct-message .direct-input {
+  margin: 1.5rem;
+  padding: 0.7rem;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  border: 1px solid rgb(187, 187, 187);
+  outline: none;
+}
+.direct-container .direct-message .direct-input:focus {
+  border: 1px solid rgb(36, 112, 199);
+  box-shadow: 0px 0px 0px 3px skyblue;
+}
+.direct-container .direct-message .direct-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7rem;
+  padding: 0.7rem;
+  align-self: flex-end;
+  margin: 0rem 1.5rem 1.5rem 0rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #35946c;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  outline: none;
+}
+.direct-container .direct-message .direct-button:hover {
+  background-color: #40a77c;
+}
+.direct-container .direct-message .direct-button:active {
+  background-color: #2d7c5b;
+}
+
+/*# sourceMappingURL=startDirectMessage.css.map */

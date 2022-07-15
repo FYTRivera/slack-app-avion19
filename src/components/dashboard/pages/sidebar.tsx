@@ -7,16 +7,29 @@ interface SidebarProps {
   setOnModal: React.Dispatch<React.SetStateAction<boolean>>;
   selectedChannel: any[];
   setSelectedChannel: React.Dispatch<React.SetStateAction<any[]>>;
+  setStartMessage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Sidebar: FC<SidebarProps> = ({
   setOnModal,
   selectedChannel,
   setSelectedChannel,
+  setStartMessage,
 }) => {
   const channelList = useRef(null);
+  const userList = useRef(null);
   const [chHeight, setChHeight] = useState("");
+  const [drHeight, setDrHeight] = useState("");
   const userData = useContext(Auth);
+
+  useEffect(() => {
+    localStorage.setItem("newChannels", JSON.stringify(selectedChannel));
+  }, [selectedChannel]);
+
+  useEffect(() => {
+    const newChannell = JSON.parse(localStorage.getItem("newChannels"));
+    newChannell && setSelectedChannel(newChannell);
+  }, []);
 
   const onLogOut = () => {
     localStorage.clear();
@@ -34,8 +47,22 @@ const Sidebar: FC<SidebarProps> = ({
     }
   };
 
+  const directHandler = () => {
+    if (userList.current.clientHeight === 0) {
+      setDrHeight("auto");
+      userList.current.style.height = drHeight;
+    } else {
+      setDrHeight("0px");
+      userList.current.style.height = drHeight;
+    }
+  };
+
   const openModal = () => {
     setOnModal(true);
+  };
+
+  const openDirect = () => {
+    setStartMessage(true);
   };
 
   useEffect(() => {
@@ -83,6 +110,7 @@ const Sidebar: FC<SidebarProps> = ({
           <i className="fa-solid fa-ellipsis-vertical"></i>More
         </div>
       </div>
+      {/* //////////////////// */}
       <div className="channels">
         <label
           htmlFor="channels"
@@ -104,6 +132,29 @@ const Sidebar: FC<SidebarProps> = ({
           <AddChannel />
         </div>
       </div>
+      {/* ////////////////////////// */}
+      <div className="direct-messages">
+        <label
+          htmlFor="direct-message"
+          className="label-direct"
+          onClick={directHandler}
+        >
+          <input type="checkbox" name="direct-message" id="direct-message" />
+          <i className="fa-solid fa-caret-down"></i>
+          <span className="direct">Direct Messages</span>
+          <span className="add-direct" onClick={openDirect}>
+            <i className="fa-solid fa-plus"></i>
+          </span>
+        </label>
+
+        <div className="direct-list" ref={userList}>
+          {/* <NavLink to="channels" className="browse-directs">
+            <i className="fa-solid fa-square-plus"></i>Browse channels
+          </NavLink>
+          <AddChannel /> */}
+        </div>
+      </div>
+      {/* ////////////////////////// */}
       <div className="direct-message"></div>
 
       <div className="footer-logout">

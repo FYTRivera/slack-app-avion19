@@ -54,8 +54,14 @@ const Modal: FC<ModalProps> = ({ setOnModal, setSelectedChannel }) => {
     setOnModal(false);
   };
 
+  const clickHandler = (e: any) => {
+    if (e.target.classList[0] === "createChannel") {
+      closeModal();
+    }
+  };
+
   return (
-    <div className="createChannel">
+    <div className="createChannel" onClick={(e) => clickHandler(e)}>
       <div className="createModal">
         <form>
           <div className="title-with-button">

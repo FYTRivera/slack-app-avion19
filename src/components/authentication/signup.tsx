@@ -24,7 +24,6 @@ const Signup: FC = () => {
   const refs = [nameIn, emailIn, passIn, conPassIn];
   const [isLoading, setIsLoading] = useState(false);
 
-  //Hides error message when user types in the form
   useEffect(() => {
     setError("");
     errorRef.current.classList.remove("animation");
@@ -57,7 +56,6 @@ const Signup: FC = () => {
       }
     } catch (error) {
       setIsLoading(false);
-
       errorRef.current.classList.add("animation");
       setError("Sign up is currently under maintenance");
     }
@@ -118,7 +116,6 @@ const Signup: FC = () => {
             setNewUser({ ...newUser, password_confirmation: e.target.value })
           }
         />
-        {/* <input className="submit" type="submit" value="Create Account" /> */}
         <button className="submit" onClick={handleSubmit}>
           <div>
             {isLoading ? (
@@ -139,7 +136,7 @@ const Signup: FC = () => {
         </Link>
       </div>
     </div>
-  );  
+  );
 };
 
 export default Signup;

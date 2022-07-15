@@ -4,11 +4,16 @@ import intro from "../../../assets/intro.svg";
 
 interface introPROPS {
   setOnModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setStartMessage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Introduction: FC<introPROPS> = ({ setOnModal }) => {
-  const clickHandler = () => {
+const Introduction: FC<introPROPS> = ({ setOnModal, setStartMessage }) => {
+  const createHandler = () => {
     setOnModal(true);
+  };
+
+  const directHandler = () => {
+    setStartMessage(true);
   };
 
   return (
@@ -27,10 +32,10 @@ const Introduction: FC<introPROPS> = ({ setOnModal }) => {
       <div className="intro-buttons">
         <h2>How do you want to work together?</h2>
         <div className="buttons">
-          <button className="start-message">
+          <button className="start-message" onClick={directHandler}>
             <i className="fa-solid fa-pen-to-square"></i> Start a direct message
           </button>
-          <button className="create-channel" onClick={clickHandler}>
+          <button className="create-channel" onClick={createHandler}>
             <i className="fa-solid fa-plus"></i> Create a channel
           </button>
         </div>

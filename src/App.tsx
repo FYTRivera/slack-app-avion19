@@ -32,15 +32,7 @@ const App: FC = () => {
         <Route element={<PrivateRoutes />}>
           <Route
             path="/dashboard/*"
-            element={
-              <Dashboard
-                token={token}
-                client={client}
-                expiry={expiry}
-                uid={uid}
-                signInData={signInData}
-              />
-            }
+            element={<Dashboard signInData={signInData} />}
           />
         </Route>
 

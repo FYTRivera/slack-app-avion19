@@ -46,10 +46,13 @@
           width: auto;
           height: auto;
           padding: 0.5rem 0.5rem 0.4rem 0.5rem;
+          color: gray;
+          transition: 0.3s;
           cursor: pointer;
 
           &:hover {
             background: rgba(105, 105, 105, 0.2);
+            color: white;
           }
         }
       }

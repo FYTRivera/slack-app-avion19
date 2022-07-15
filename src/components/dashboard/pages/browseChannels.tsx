@@ -3,7 +3,6 @@ import { getChannelDetails, getChannels } from "../../../utils/dataFetching";
 import "../../../styles/dashboard/browseChannels.css";
 import { Auth } from "../../../App";
 import { PulseLoader } from "react-spinners";
-import styled from "styled-components";
 
 interface BrowseChannelsProps {
   selectedChannel: any[];
@@ -37,14 +36,7 @@ const BrowseChannels: FC<BrowseChannelsProps> = (props) => {
     currentButton.current.style.opacity = "0";
   };
 
-  useEffect(() => {
-    localStorage.setItem("newChannels", JSON.stringify(selectedChannel));
-  }, [selectedChannel]);
-
-  useEffect(() => {
-    const newChannell = JSON.parse(localStorage.getItem("newChannels"));
-    newChannell && setSelectedChannel(newChannell);
-  }, []);
+  
 
   const displayChannel = async () => {
     try {

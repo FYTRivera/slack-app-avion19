@@ -63,6 +63,7 @@ const Signin: FC<signInProp> = (props) => {
         setError(response.errors[0]);
       }
     } catch {
+      setIsLoading(false);
       errorRef.current.classList.add("animation");
       setError("Sign in is currently under maintenance");
     }

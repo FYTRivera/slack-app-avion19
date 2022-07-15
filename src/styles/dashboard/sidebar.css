@@ -82,12 +82,16 @@
 .sidebar .options .more:hover {
   background-color: rgb(52, 22, 52);
 }
+.sidebar .direct-messages,
 .sidebar .channels {
   color: rgb(180, 180, 180);
   padding: 1rem 0;
   user-select: none;
   height: auto;
 }
+.sidebar .direct-messages .label-direct,
+.sidebar .direct-messages .label-channel,
+.sidebar .channels .label-direct,
 .sidebar .channels .label-channel {
   cursor: pointer;
   display: flex;
@@ -96,9 +100,21 @@
   position: relative;
   padding: 0.5rem 1rem;
 }
+.sidebar .direct-messages .label-direct:hover .add-channel,
+.sidebar .direct-messages .label-channel:hover .add-channel,
+.sidebar .channels .label-direct:hover .add-channel,
 .sidebar .channels .label-channel:hover .add-channel {
   opacity: 1;
 }
+.sidebar .direct-messages .label-direct:hover .add-direct,
+.sidebar .direct-messages .label-channel:hover .add-direct,
+.sidebar .channels .label-direct:hover .add-direct,
+.sidebar .channels .label-channel:hover .add-direct {
+  opacity: 1;
+}
+.sidebar .direct-messages .label-direct .fa-caret-down,
+.sidebar .direct-messages .label-channel .fa-caret-down,
+.sidebar .channels .label-direct .fa-caret-down,
 .sidebar .channels .label-channel .fa-caret-down {
   display: flex;
   align-items: center;
@@ -107,12 +123,26 @@
   height: 1rem;
   transition: transform 0.2s;
 }
+.sidebar .direct-messages .label-direct .direct,
+.sidebar .direct-messages .label-direct .channel,
+.sidebar .direct-messages .label-channel .direct,
+.sidebar .direct-messages .label-channel .channel,
+.sidebar .channels .label-direct .direct,
+.sidebar .channels .label-direct .channel,
+.sidebar .channels .label-channel .direct,
 .sidebar .channels .label-channel .channel {
   display: flex;
   align-items: center;
   justify-content: center;
   justify-self: center;
 }
+.sidebar .direct-messages .label-direct .add-direct,
+.sidebar .direct-messages .label-direct .add-channel,
+.sidebar .direct-messages .label-channel .add-direct,
+.sidebar .direct-messages .label-channel .add-channel,
+.sidebar .channels .label-direct .add-direct,
+.sidebar .channels .label-direct .add-channel,
+.sidebar .channels .label-channel .add-direct,
 .sidebar .channels .label-channel .add-channel {
   position: absolute;
   right: 10px;
@@ -121,9 +151,23 @@
   padding: 0.4rem;
   border-radius: 3px;
 }
+.sidebar .direct-messages .label-direct .add-direct:hover,
+.sidebar .direct-messages .label-direct .add-channel:hover,
+.sidebar .direct-messages .label-channel .add-direct:hover,
+.sidebar .direct-messages .label-channel .add-channel:hover,
+.sidebar .channels .label-direct .add-direct:hover,
+.sidebar .channels .label-direct .add-channel:hover,
+.sidebar .channels .label-channel .add-direct:hover,
 .sidebar .channels .label-channel .add-channel:hover {
   background-color: rgba(128, 128, 128, 0.3);
 }
+.sidebar .direct-messages .label-direct .add-direct i,
+.sidebar .direct-messages .label-direct .add-channel i,
+.sidebar .direct-messages .label-channel .add-direct i,
+.sidebar .direct-messages .label-channel .add-channel i,
+.sidebar .channels .label-direct .add-direct i,
+.sidebar .channels .label-direct .add-channel i,
+.sidebar .channels .label-channel .add-direct i,
 .sidebar .channels .label-channel .add-channel i {
   display: flex;
   align-items: center;
@@ -131,18 +175,34 @@
   width: auto;
   height: auto;
 }
+.sidebar .direct-messages .label-direct input,
+.sidebar .direct-messages .label-channel input,
+.sidebar .channels .label-direct input,
 .sidebar .channels .label-channel input {
   display: none;
 }
+.sidebar .direct-messages .label-direct input:checked ~ .fa-caret-down,
+.sidebar .direct-messages .label-channel input:checked ~ .fa-caret-down,
+.sidebar .channels .label-direct input:checked ~ .fa-caret-down,
 .sidebar .channels .label-channel input:checked ~ .fa-caret-down {
   transform: rotate(-90deg);
 }
+.sidebar .direct-messages .direct-list,
+.sidebar .direct-messages .channel-list,
+.sidebar .channels .direct-list,
 .sidebar .channels .channel-list {
   display: block;
   height: auto;
   overflow: hidden;
   transition: height 0.2s;
 }
+.sidebar .direct-messages .direct-list .browse-directs,
+.sidebar .direct-messages .direct-list .browse-channels,
+.sidebar .direct-messages .channel-list .browse-directs,
+.sidebar .direct-messages .channel-list .browse-channels,
+.sidebar .channels .direct-list .browse-directs,
+.sidebar .channels .direct-list .browse-channels,
+.sidebar .channels .channel-list .browse-directs,
 .sidebar .channels .channel-list .browse-channels {
   font-size: 0.8rem;
   padding: 0.3rem 1.1rem;
@@ -153,9 +213,23 @@
   text-decoration: none;
   color: rgb(180, 180, 180);
 }
+.sidebar .direct-messages .direct-list .browse-directs .fa-square-plus,
+.sidebar .direct-messages .direct-list .browse-channels .fa-square-plus,
+.sidebar .direct-messages .channel-list .browse-directs .fa-square-plus,
+.sidebar .direct-messages .channel-list .browse-channels .fa-square-plus,
+.sidebar .channels .direct-list .browse-directs .fa-square-plus,
+.sidebar .channels .direct-list .browse-channels .fa-square-plus,
+.sidebar .channels .channel-list .browse-directs .fa-square-plus,
 .sidebar .channels .channel-list .browse-channels .fa-square-plus {
   font-size: 1rem;
 }
+.sidebar .direct-messages .direct-list .browse-directs:hover:not(.active),
+.sidebar .direct-messages .direct-list .browse-channels:hover:not(.active),
+.sidebar .direct-messages .channel-list .browse-directs:hover:not(.active),
+.sidebar .direct-messages .channel-list .browse-channels:hover:not(.active),
+.sidebar .channels .direct-list .browse-directs:hover:not(.active),
+.sidebar .channels .direct-list .browse-channels:hover:not(.active),
+.sidebar .channels .channel-list .browse-directs:hover:not(.active),
 .sidebar .channels .channel-list .browse-channels:hover:not(.active) {
   background-color: rgb(52, 22, 52);
 }
