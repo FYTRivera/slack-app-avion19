@@ -1,30 +1,27 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "./pages/sidebar";
-import Threads from "./pages/threads";
 import DirectMessages from "./pages/directMessage";
-import MentionsAndReactions from "./pages/mentions_and_reactions";
 import Introduction from "./pages/introduction";
 import "../../styles/dashboard/index.css";
 import BrowseChannels from "./pages/browseChannels";
 import CreateChannelModal from "./modal/createChannelModal";
 import DirectMessageModal from "./modal/startDirectMessage";
 
-interface dashboardProp {
-  signInData: {
-    id?: number;
-  };
-}
-
-const Dashboard: FC<dashboardProp> = (props) => {
-  const { signInData } = props;
+const Dashboard: FC = () => {
   const [onModal, setOnModal] = useState(false);
   const [startMessage, setStartMessage] = useState(false);
   const [selectedChannel, setSelectedChannel] = useState<any[]>([]);
+  const [selectedUser, setSelectedUser] = useState([]);
 
   return (
     <div className="dashboard">
-      {startMessage && <DirectMessageModal setStartMessage={setStartMessage} />}
+      {startMessage && (
+        <DirectMessageModal
+          setStartMessage={setStartMessage}
+          setSelectedUser={setSelectedUser}
+        />
+      )}
       {onModal && (
         <CreateChannelModal
           setOnModal={setOnModal}
@@ -37,6 +34,7 @@ const Dashboard: FC<dashboardProp> = (props) => {
         selectedChannel={selectedChannel}
         setSelectedChannel={setSelectedChannel}
         setStartMessage={setStartMessage}
+        selectedUser={selectedUser}
       />
       <Routes>
         <Route
@@ -66,10 +64,7 @@ const Dashboard: FC<dashboardProp> = (props) => {
             />
           }
         />
-        <Route
-          path="direct_messages"
-          element={<DirectMessages signInData={signInData} />}
-        />
+        <Route path="direct_messages" element={<DirectMessages />} />
         <Route
           path="mentions_and_reactions"
           element={

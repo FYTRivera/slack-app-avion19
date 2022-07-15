@@ -1,12 +1,12 @@
-import "../../../styles/dashboard/message.css";
-import { useState, useEffect, useRef, FC, useContext } from "react";
-import "../../../styles/dashboard/message.css";
+import { useState, useEffect, useRef, FC, useContext, FormEvent } from "react";
+import "../../../styles/dashboard/directMessage.css";
 import { Auth } from "../../../App";
 import {
   getUsers,
   receiveMessageAPI,
   sendMessageAPI,
 } from "../../../utils/dataFetching";
+import { HashLoader } from "react-spinners";
 
 //////ACCOUNT DETAILS//////
 
@@ -24,17 +24,9 @@ import {
 
 //////ACCOUNT DETAILS//////
 
-interface messageProp {
-  signInData: {
-    id?: number;
-  };
-}
-
-const DirectMessages: FC<messageProp> = (props) => {
-  const { signInData } = props;
-  const userData = useContext(Auth);
-
-  console.log(userData);
+const DirectMessages: FC = () => {
+  const { headerData, signInData } = useContext(Auth);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [directMessage, setDirectMessage] = useState({
     receiver: window.localStorage.getItem("lastAccount") || 2243,
@@ -45,43 +37,39 @@ const DirectMessages: FC<messageProp> = (props) => {
   window.localStorage.setItem("lastAccount", directMessage.receiver.toString());
 
   const [receivedMessages, setReceivedMessages] = useState([]);
-
   const [isMessaged, setIsMessaged] = useState(false);
-
   const [error, setError] = useState("");
-
   const [users, setUsers] = useState([]);
-
   const [filteredArray, setFilteredArray] = useState([{ uid: "", id: "" }]);
-
   const [recipientUID, setRecipientUID] = useState("");
-
+  const [selectedUser, setSelectedUser] = useState(0);
   const selectBox = useRef(null);
 
-  const [selectedUser, setSelectedUser] = useState(0);
-
-  async function handleMessageSend(e: any) {
+  async function handleMessageSend(e: FormEvent) {
     e.preventDefault();
     try {
-      const fetch = await sendMessageAPI(userData, directMessage);
+      const fetch = await sendMessageAPI(headerData, directMessage);
 
       if (fetch.data) {
         setDirectMessage({ ...directMessage, body: "" });
         setError("");
         isMessaged ? setIsMessaged(false) : setIsMessaged(true);
       } else if (!fetch.success) {
-        setError(fetch.errors);
+        setError(fetch.errors[0]);
       }
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   //////////////////////////////////////////////RECEIVED MESSAGES////////////////////////////////////////////////
 
   async function handleMessageReceive() {
     try {
-      const fetch = await receiveMessageAPI(userData, directMessage);
+      const fetch = await receiveMessageAPI(headerData, directMessage);
 
       if (fetch.data) {
+        setIsLoading(false);
         setReceivedMessages(fetch.data);
         setError("");
       } else if (!fetch.success) {
@@ -97,22 +85,23 @@ const DirectMessages: FC<messageProp> = (props) => {
     handleMessageReceive();
   }, [directMessage.receiver, isMessaged]);
 
-  setTimeout(handleMessageReceive, 1000);
+  // setTimeout(() => {
+  //   handleMessageReceive();
+  // }, 5000);
+
   /////////////////////////////////////////RECEIVED MESSAGES//////////////////////////////////////////////
   /////////////////////////////////////////GET USERS/////////////////////////////////////////////////////
 
   async function handleGetUsers() {
     try {
-      const fetch = await getUsers(userData);
+      const fetch = await getUsers(headerData);
 
       if (fetch.data) {
-        console.log(fetch.data);
         setUsers(fetch.data);
         setError("");
         setFilteredArray(
           users.filter((user) => user.uid.includes(recipientUID))
         );
-        console.log(filteredArray, "filtered array");
       } else if (!fetch.success) {
         setReceivedMessages([]);
         setError(fetch.errors);
@@ -122,7 +111,6 @@ const DirectMessages: FC<messageProp> = (props) => {
       console.error(e);
     }
   }
-  // useEffect(()=>{handleGetUsers()},[users]);
 
   useEffect(() => {
     handleGetUsers();
@@ -148,7 +136,40 @@ const DirectMessages: FC<messageProp> = (props) => {
       });
     }
   }
-  ////////////////////////////////////////GET USERS///////////////////////////////////////////////////////
+
+  const DisplayMessages = () => {
+    return (
+      <ul>
+        {receivedMessages.map((message, index) =>
+          message.sender.id == directMessage.receiver ? (
+            <div className="received">
+              <div className="name-date">
+                <h5 className="recipient-user">
+                  User #{directMessage.receiver}
+                </h5>
+                <h6 className="received-date-and-time">{message.created_at}</h6>
+              </div>
+              <div key={index} className="received-message">
+                {message.body}
+              </div>
+              <h6 className="status">Received</h6>
+            </div>
+          ) : (
+            <div className="sent">
+              <div className="name-date">
+                <h6 className="sent-date-and-time">{message.created_at}</h6>
+                <h5 className="sender-user">User #{signInData.id}</h5>
+              </div>
+              <div key={index} className="sent-message">
+                {message.body}
+              </div>
+              <h6 className="status">Sent</h6>
+            </div>
+          )
+        )}
+      </ul>
+    );
+  };
 
   return (
     <div className="messages-div">
@@ -167,14 +188,12 @@ const DirectMessages: FC<messageProp> = (props) => {
             <option> Click here to see users! </option>
             {recipientUID !== "" ? (
               filteredArray.map((user) => (
-                <>
-                  <option>
-                    {user.uid} | {user.id}
-                  </option>
-                </>
+                <option>
+                  {user.uid} | {user.id}
+                </option>
               ))
             ) : (
-              <p>nothing</p>
+              <p>No users</p>
             )}
           </select>
         </div>
@@ -187,37 +206,11 @@ const DirectMessages: FC<messageProp> = (props) => {
       </div>
 
       <div className="message-text">
-        <ul>
-          {receivedMessages.map((message, index) =>
-            message.sender.id == directMessage.receiver ? (
-              <div className="received">
-                <div className="name-date">
-                  <h5 className="recipient-user">
-                    User #{directMessage.receiver}
-                  </h5>
-                  <h6 className="received-date-and-time">
-                    {message.created_at}
-                  </h6>
-                </div>
-                <div key={index} className="received-message">
-                  {message.body}
-                </div>
-                <h6 className="status">Received</h6>
-              </div>
-            ) : (
-              <div className="sent">
-                <div className="name-date">
-                  <h6 className="sent-date-and-time">{message.created_at}</h6>
-                  <h5 className="sender-user">User #{signInData.id}</h5>
-                </div>
-                <div key={index} className="sent-message">
-                  {message.body}
-                </div>
-                <h6 className="status">Sent</h6>
-              </div>
-            )
-          )}
-        </ul>
+        {isLoading ? (
+          <HashLoader size={45} className="loading" color="#813481" />
+        ) : (
+          <DisplayMessages />
+        )}
       </div>
 
       <div className="bottom-div">

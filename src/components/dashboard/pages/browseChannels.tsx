@@ -11,7 +11,7 @@ interface BrowseChannelsProps {
 
 const BrowseChannels: FC<BrowseChannelsProps> = (props) => {
   const { selectedChannel, setSelectedChannel } = props;
-  const userData = useContext(Auth);
+  const { headerData, signInData } = useContext(Auth);
   const [channels, setChannels] = useState([]);
   const [total, setTotal] = useState<number>(0);
   const [ids, setIds] = useState([]);
@@ -36,11 +36,9 @@ const BrowseChannels: FC<BrowseChannelsProps> = (props) => {
     currentButton.current.style.opacity = "0";
   };
 
-  
-
   const displayChannel = async () => {
     try {
-      const fetch = await getChannels(userData);
+      const fetch = await getChannels(headerData);
       const getData = fetch.data;
 
       setIsLoading(false);
@@ -81,7 +79,7 @@ const BrowseChannels: FC<BrowseChannelsProps> = (props) => {
                 {channel.name}
               </div>
               <div className="channel-members">
-                1 members • Channel ID: {channel.id} • Created:{" "}
+                2 members • Channel ID: {channel.id} • Created:{" "}
                 {channel.created_at.substring(0, 10)}
               </div>
             </div>

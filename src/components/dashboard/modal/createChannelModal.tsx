@@ -11,7 +11,7 @@ interface ModalProps {
 }
 
 const Modal: FC<ModalProps> = ({ setOnModal, setSelectedChannel }) => {
-  const userData = useContext(Auth);
+  const { headerData, signInData } = useContext(Auth);
   const [error, setError] = useState("");
   const errorDiv = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,7 @@ const Modal: FC<ModalProps> = ({ setOnModal, setSelectedChannel }) => {
     errorDiv.current.classList.remove("animation");
 
     try {
-      const fetch = await createChannel(userData, createChannelInfo);
+      const fetch = await createChannel(headerData, createChannelInfo);
       setIsLoading(false);
 
       if (!fetch.errors) {

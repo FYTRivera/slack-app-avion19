@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import  { FC } from "react";
 
 const Threads: FC = () => {
   return <h1>Threads</h1>;

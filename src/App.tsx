@@ -13,11 +13,12 @@ const App: FC = () => {
   const [client, setClient] = useState("");
   const [expiry, setExpiry] = useState("");
   const [uid, setUid] = useState("");
-  const userData = { token, client, expiry, uid };
+  const headerData = { token, client, expiry, uid };
 
   const [signInData, setSignInData] = useState({});
 
   const navigate = useNavigate();
+  console.log(signInData);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -27,13 +28,10 @@ const App: FC = () => {
   }, [isLoggedIn]);
 
   return (
-    <Auth.Provider value={userData}>
+    <Auth.Provider value={{ headerData, signInData }}>
       <Routes>
         <Route element={<PrivateRoutes />}>
-          <Route
-            path="/dashboard/*"
-            element={<Dashboard signInData={signInData} />}
-          />
+          <Route path="/dashboard/*" element={<Dashboard />} />
         </Route>
 
         <Route

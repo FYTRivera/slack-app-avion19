@@ -8,6 +8,7 @@ interface SidebarProps {
   selectedChannel: any[];
   setSelectedChannel: React.Dispatch<React.SetStateAction<any[]>>;
   setStartMessage: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedUser: any[];
 }
 
 const Sidebar: FC<SidebarProps> = ({
@@ -15,12 +16,13 @@ const Sidebar: FC<SidebarProps> = ({
   selectedChannel,
   setSelectedChannel,
   setStartMessage,
+  selectedUser,
 }) => {
   const channelList = useRef(null);
   const userList = useRef(null);
   const [chHeight, setChHeight] = useState("");
   const [drHeight, setDrHeight] = useState("");
-  const userData = useContext(Auth);
+  const { headerData, signInData } = useContext(Auth);
 
   useEffect(() => {
     localStorage.setItem("newChannels", JSON.stringify(selectedChannel));
@@ -65,12 +67,6 @@ const Sidebar: FC<SidebarProps> = ({
     setStartMessage(true);
   };
 
-  useEffect(() => {
-    setInterval(() => {
-      // console.log(selectedChannel);
-    }, 200);
-  }, []);
-
   const AddChannel = () => {
     const newChannell = JSON.parse(localStorage.getItem("newChannels"));
 
@@ -85,6 +81,31 @@ const Sidebar: FC<SidebarProps> = ({
           </NavLink>
         );
       });
+    }
+  };
+
+  useEffect(() => {
+    console.log(signInData);
+  }, [selectedUser]);
+
+  const AddMessage = () => {
+    // const newChannell = JSON.parse(localStorage.getItem("newChannels"));
+
+    if (selectedUser) {
+      return (
+        <>
+          {selectedUser.map((user: any) => {
+            <NavLink
+              to={`direct_messages/${user.id}`}
+              className="browse-directs"
+              key={user.id}
+            >
+              <i className="fa-solid fa-hashtag"></i>
+              {user.email}
+            </NavLink>;
+          })}
+        </>
+      );
     }
   };
 
@@ -148,17 +169,21 @@ const Sidebar: FC<SidebarProps> = ({
         </label>
 
         <div className="direct-list" ref={userList}>
-          {/* <NavLink to="channels" className="browse-directs">
-            <i className="fa-solid fa-square-plus"></i>Browse channels
+          <NavLink
+            to="direct_messages"
+            className="browse-directs"
+            onClick={() => openDirect()}
+          >
+            <i className="fa-solid fa-square-plus"></i>Browse Users
           </NavLink>
-          <AddChannel /> */}
+          <AddMessage />
         </div>
       </div>
       {/* ////////////////////////// */}
       <div className="direct-message"></div>
 
       <div className="footer-logout">
-        <div className="user-email">{userData.uid}</div>
+        <div className="user-email">{headerData.uid}</div>
         <Link to="/signin" onClick={onLogOut} className="logout">
           Log Out
         </Link>

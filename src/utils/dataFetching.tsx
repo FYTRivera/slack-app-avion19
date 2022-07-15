@@ -33,31 +33,31 @@ const signInAPI = async (signUser: any) => {
   );
 };
 
-const getChannels = async (userData: any) => {
+const getChannels = async (headerData: any) => {
   return (
     await fetch(`http://${process.env.REACT_APP_API_URL}/api/v1/channels`, {
       method: "GET",
       headers: {
-        "access-token": userData.token,
-        client: userData.client,
-        expiry: userData.expiry,
-        uid: userData.uid,
+        "access-token": headerData.token,
+        client: headerData.client,
+        expiry: headerData.expiry,
+        uid: headerData.uid,
       },
     })
   ).json();
 };
 
-const getChannelDetails = async (userData: any, id: any) => {
+const getChannelDetails = async (headerData: any, id: any) => {
   return (
     await fetch(
       `http://${process.env.REACT_APP_API_URL}/api/v1/channels/${id}`,
       {
         method: "GET",
         headers: {
-          "access-token": userData.token,
-          client: userData.client,
-          expiry: userData.expiry,
-          uid: userData.uid,
+          "access-token": headerData.token,
+          client: headerData.client,
+          expiry: headerData.expiry,
+          uid: headerData.uid,
         },
       }
     )
@@ -65,7 +65,7 @@ const getChannelDetails = async (userData: any, id: any) => {
 };
 
 const createChannel = async (
-  userData: any,
+  headerData: any,
   createChannelInfo: {
     name: string;
     user_ids: any[];
@@ -77,10 +77,10 @@ const createChannel = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "access-token": userData.token,
-        client: userData.client,
-        expiry: userData.expiry,
-        uid: userData.uid,
+        "access-token": headerData.token,
+        client: headerData.client,
+        expiry: headerData.expiry,
+        uid: headerData.uid,
       },
       body: JSON.stringify({
         name: createChannelInfo.name,
@@ -91,16 +91,16 @@ const createChannel = async (
   ).json();
 };
 
-const sendMessageAPI = async (userData: any, directMessage: any) => {
+const sendMessageAPI = async (headerData: any, directMessage: any) => {
   return (
     await fetch(`http://${process.env.REACT_APP_API_URL}/api/v1/messages`, {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "access-token": userData.token,
-        client: userData.client,
-        expiry: userData.expiry,
-        uid: userData.uid,
+        "access-token": headerData.token,
+        client: headerData.client,
+        expiry: headerData.expiry,
+        uid: headerData.uid,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -112,7 +112,7 @@ const sendMessageAPI = async (userData: any, directMessage: any) => {
   ).json();
 };
 
-const receiveMessageAPI = async (userData: any, directMessage: any) => {
+const receiveMessageAPI = async (headerData: any, directMessage: any) => {
   return (
     await fetch(
       `http://${process.env.REACT_APP_API_URL}/api/v1/messages?receiver_id=${directMessage.receiver}&receiver_class=User`,
@@ -120,10 +120,10 @@ const receiveMessageAPI = async (userData: any, directMessage: any) => {
         method: "GET",
         headers: {
           Accept: "application/json",
-          "access-token": userData.token,
-          client: userData.client,
-          expiry: userData.expiry,
-          uid: userData.uid,
+          "access-token": headerData.token,
+          client: headerData.client,
+          expiry: headerData.expiry,
+          uid: headerData.uid,
           "Content-Type": "application/json",
         },
       }
@@ -131,15 +131,15 @@ const receiveMessageAPI = async (userData: any, directMessage: any) => {
   ).json();
 };
 
-const getUsers = async (userData: any) => {
+const getUsers = async (headerData: any) => {
   return (
     await fetch(`http://${process.env.REACT_APP_API_URL}/api/v1/users`, {
       method: "GET",
       headers: {
-        "access-token": userData.token,
-        client: userData.client,
-        expiry: userData.expiry,
-        uid: userData.uid,
+        "access-token": headerData.token,
+        client: headerData.client,
+        expiry: headerData.expiry,
+        uid: headerData.uid,
       },
     })
   ).json();
