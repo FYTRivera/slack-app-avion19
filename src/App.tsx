@@ -35,7 +35,7 @@ const App: FC = () => {
         </Route>
 
         <Route
-          path="signin"
+          path="/"
           element={
             <Signin
               setIsLoggedIn={setIsLoggedIn}

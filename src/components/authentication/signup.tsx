@@ -131,7 +131,7 @@ const Signup: FC = () => {
       </div>
       <div className="footer">
         <h4 className="already-slack">Already using Slack?</h4>
-        <Link to="/signin" className="link-signup">
+        <Link to="/" className="link-signup">
           Sign in to an existing account
         </Link>
       </div>

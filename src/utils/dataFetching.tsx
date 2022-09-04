@@ -1,6 +1,6 @@
 const signUpAPI = async (newUser: any) => {
   return (
-    await fetch(`http://${process.env.REACT_APP_API_URL}/api/v1/auth/`, {
+    await fetch(`https://${process.env.REACT_APP_API_URL}/api/v1/auth/`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -18,7 +18,7 @@ const signUpAPI = async (newUser: any) => {
 
 const signInAPI = async (signUser: any) => {
   return await fetch(
-    `http://${process.env.REACT_APP_API_URL}/api/v1/auth/sign_in`,
+    `https://${process.env.REACT_APP_API_URL}/api/v1/auth/sign_in`,
     {
       method: "POST",
       headers: {
@@ -35,7 +35,7 @@ const signInAPI = async (signUser: any) => {
 
 const getChannels = async (headerData: any) => {
   return (
-    await fetch(`http://${process.env.REACT_APP_API_URL}/api/v1/channels`, {
+    await fetch(`https://${process.env.REACT_APP_API_URL}/api/v1/channels`, {
       method: "GET",
       headers: {
         "access-token": headerData.token,
@@ -50,7 +50,7 @@ const getChannels = async (headerData: any) => {
 const getChannelDetails = async (headerData: any, id: any) => {
   return (
     await fetch(
-      `http://${process.env.REACT_APP_API_URL}/api/v1/channels/${id}`,
+      `https://${process.env.REACT_APP_API_URL}/api/v1/channels/${id}`,
       {
         method: "GET",
         headers: {
@@ -73,7 +73,7 @@ const createChannel = async (
   }
 ) => {
   return (
-    await fetch(`http://${process.env.REACT_APP_API_URL}/api/v1/channels`, {
+    await fetch(`https://${process.env.REACT_APP_API_URL}/api/v1/channels`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const createChannel = async (
 
 const sendMessageAPI = async (headerData: any, directMessage: any) => {
   return (
-    await fetch(`http://${process.env.REACT_APP_API_URL}/api/v1/messages`, {
+    await fetch(`https://${process.env.REACT_APP_API_URL}/api/v1/messages`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -115,7 +115,7 @@ const sendMessageAPI = async (headerData: any, directMessage: any) => {
 const receiveMessageAPI = async (headerData: any, directMessage: any) => {
   return (
     await fetch(
-      `http://${process.env.REACT_APP_API_URL}/api/v1/messages?receiver_id=${directMessage.receiver}&receiver_class=User`,
+      `https://${process.env.REACT_APP_API_URL}/api/v1/messages?receiver_id=${directMessage.receiver}&receiver_class=User`,
       {
         method: "GET",
         headers: {
@@ -133,7 +133,7 @@ const receiveMessageAPI = async (headerData: any, directMessage: any) => {
 
 const getUsers = async (headerData: any) => {
   return (
-    await fetch(`http://${process.env.REACT_APP_API_URL}/api/v1/users`, {
+    await fetch(`https://${process.env.REACT_APP_API_URL}/api/v1/users`, {
       method: "GET",
       headers: {
         "access-token": headerData.token,
